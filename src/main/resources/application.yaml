@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: swi-project
+  datasource:
+    url: jdbc:postgresql://localhost:5432/swi_databaze
+    username: postgres
+    password: Heslododatabaze123
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
