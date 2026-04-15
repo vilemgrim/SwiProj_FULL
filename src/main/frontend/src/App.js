@@ -1,68 +1,100 @@
 import React, { useState } from "react";
+import LoginPage from "./LoginPage";
+import RegisterPage from "./RegisterPage";
+import ChangePasswordPage from "./ChangePasswordPage";
+import HomePage from "./HomePage";
 
 function App() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+    const [page, setPage] = useState("menu"); // menu | login | register | change | home
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Přihlašovací údaje:", username, password);
-    // sem později přidáme volání na backend
-  };
+    // Funkce pro odhlášení
+    const logout = () => {
+        setPage("menu");
+    };
 
-  return (
-      <div style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100vh",
-        backgroundColor: "#f5f5f5"
-      }}>
-        <form
-            onSubmit={handleSubmit}
-            style={{
-              padding: "30px",
-              borderRadius: "10px",
-              backgroundColor: "white",
-              boxShadow: "0 0 10px rgba(0,0,0,0.1)",
-              width: "300px"
-            }}
-        >
-          <h2 style={{ textAlign: "center" }}>Přihlášení</h2>
+    // Přepínání mezi stránkami
+    if (page === "login") return <LoginPage goBack={() => setPage("menu")} onLogin={() => setPage("home")} />;
+    if (page === "register") return <RegisterPage goBack={() => setPage("menu")} />;
+    if (page === "change") return <ChangePasswordPage goBack={() => setPage("menu")} />;
+    if (page === "home") return <HomePage logout={logout} />;
 
-          <label>Uživatelské jméno</label>
-          <input
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              style={{ width: "100%", padding: "8px", marginBottom: "15px" }}
-          />
+    // Hlavní menu s ikonkami
+    return (
+        <div style={{
+            height: "100vh",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            backgroundColor: "#f5f5f5",
+            flexDirection: "column"
+        }}>
+            <h1>Správa účtu</h1>
 
-          <label>Heslo</label>
-          <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              style={{ width: "100%", padding: "8px", marginBottom: "20px" }}
-          />
+            <div style={{ display: "flex", gap: "40px", marginTop: "40px" }}>
 
-          <button
-              type="submit"
-              style={{
-                width: "100%",
-                padding: "10px",
-                backgroundColor: "#007bff",
-                color: "white",
-                border: "none",
-                borderRadius: "5px",
-                cursor: "pointer"
-              }}
-          >
-            Přihlásit se
-          </button>
-        </form>
-      </div>
-  );
+                {/* LOGIN */}
+                <div
+                    onClick={() => setPage("login")}
+                    style={{
+                        width: "120px",
+                        height: "120px",
+                        backgroundColor: "white",
+                        borderRadius: "15px",
+                        boxShadow: "0 0 10px rgba(0,0,0,0.1)",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        cursor: "pointer",
+                        flexDirection: "column"
+                    }}
+                >
+                    <span style={{ fontSize: "40px" }}>🔑</span>
+                    <p>Přihlášení</p>
+                </div>
+
+                {/* REGISTER */}
+                <div
+                    onClick={() => setPage("register")}
+                    style={{
+                        width: "120px",
+                        height: "120px",
+                        backgroundColor: "white",
+                        borderRadius: "15px",
+                        boxShadow: "0 0 10px rgba(0,0,0,0.1)",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        cursor: "pointer",
+                        flexDirection: "column"
+                    }}
+                >
+                    <span style={{ fontSize: "40px" }}>➕</span>
+                    <p>Nový účet</p>
+                </div>
+
+                {/* CHANGE PASSWORD */}
+                <div
+                    onClick={() => setPage("change")}
+                    style={{
+                        width: "120px",
+                        height: "120px",
+                        backgroundColor: "white",
+                        borderRadius: "15px",
+                        boxShadow: "0 0 10px rgba(0,0,0,0.1)",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        cursor: "pointer",
+                        flexDirection: "column"
+                    }}
+                >
+                    <span style={{ fontSize: "40px" }}>🔄</span>
+                    <p>Změna hesla</p>
+                </div>
+
+            </div>
+        </div>
+    );
 }
 
 export default App;
