@@ -7,18 +7,38 @@ import HomePage from "./HomePage";
 function App() {
     const [page, setPage] = useState("menu"); // menu | login | register | change | home
 
+    // 🔥 uložíme username + admin flag
+    const [username, setUsername] = useState("");
+    const [isAdmin, setIsAdmin] = useState(false);
+
     // Funkce pro odhlášení
     const logout = () => {
+        setUsername("");
+        setIsAdmin(false);
         setPage("menu");
     };
 
-    // Přepínání mezi stránkami
-    if (page === "login") return <LoginPage goBack={() => setPage("menu")} onLogin={() => setPage("home")} />;
-    if (page === "register") return <RegisterPage goBack={() => setPage("menu")} />;
-    if (page === "change") return <ChangePasswordPage goBack={() => setPage("menu")} />;
-    if (page === "home") return <HomePage logout={logout} />;
+    // 🔥 Funkce, kterou zavolá LoginPage po úspěšném loginu
+    const handleLogin = (user, adminFlag) => {
+        setUsername(user);
+        setIsAdmin(adminFlag);
+        setPage("home");
+    };
 
-    // Hlavní menu s ikonkami
+    // Přepínání mezi stránkami
+    if (page === "login")
+        return <LoginPage goBack={() => setPage("menu")} onLogin={handleLogin} />;
+
+    if (page === "register")
+        return <RegisterPage goBack={() => setPage("menu")} />;
+
+    if (page === "change")
+        return <ChangePasswordPage goBack={() => setPage("menu")} />;
+
+    if (page === "home")
+        return <HomePage username={username} isAdmin={isAdmin} logout={logout} />;
+
+    // Hlavní menu
     return (
         <div style={{
             height: "100vh",
