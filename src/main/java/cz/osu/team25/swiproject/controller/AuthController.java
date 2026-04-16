@@ -1,0 +1,45 @@
+package cz.osu.team25.swiproject.controller;
+
+import cz.osu.team25.swiproject.model.User;
+import cz.osu.team25.swiproject.service.UserService;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
+
+@RestController
+@RequestMapping("/api/auth")
+@CrossOrigin(origins = "http://localhost:3000")
+public class AuthController {
+
+    private final UserService userService;
+
+    public AuthController(UserService userService) {
+        this.userService = userService;
+    }
+
+    @PostMapping("/register")
+    public boolean register(@RequestParam String username, @RequestParam String password) {
+        return userService.register(username, password);
+    }
+
+    @PostMapping("/login-info")
+    public Map<String, Object> loginInfo(@RequestParam String username, @RequestParam String password) {
+        Map<String, Object> result = new HashMap<>();
+
+        boolean success = userService.login(username, password);
+        result.put("success", success);
+
+        if (success) {
+            User user = userService.getUser(username);
+            result.put("admin", user.isAdmin());
+        }
+
+        return result;
+    }
+
+    @PostMapping("/change-password")
+    public boolean changePassword(@RequestParam String username, @RequestParam String newPassword) {
+        return userService.changePassword(username, newPassword);
+    }
+}

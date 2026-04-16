@@ -4,10 +4,33 @@ function ChangePasswordPage({ goBack }) {
     const [username, setUsername] = useState("");
     const [newPassword, setNewPassword] = useState("");
 
-    const handleChange = (e) => {
+    const handleChange = async (e) => {
         e.preventDefault();
-        alert("Heslo změněno (zatím bez ukládání)");
-        goBack();
+
+        try {
+            const response = await fetch("http://localhost:8080/api/auth/change-password", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+                body: new URLSearchParams({
+                    username: username,
+                    newPassword: newPassword,
+                }),
+            });
+
+            const result = await response.json();
+
+            if (result === true) {
+                alert("Heslo úspěšně změněno!");
+                goBack();
+            } else {
+                alert("Uživatel neexistuje!");
+            }
+        } catch (error) {
+            alert("Chyba při komunikaci se serverem");
+            console.error(error);
+        }
     };
 
     return (
@@ -36,3 +59,4 @@ function ChangePasswordPage({ goBack }) {
 }
 
 export default ChangePasswordPage;
+

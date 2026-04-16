@@ -4,12 +4,35 @@ function LoginPage({ goBack, onLogin }) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
-    const handleLogin = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
-        if (username === "admin" && password === "1234") {
-            onLogin();
-        } else {
-            alert("Špatné přihlašovací údaje!");
+
+        try {
+            const response = await fetch("http://localhost:8080/api/auth/login-info", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+                body: new URLSearchParams({
+                    username: username,
+                    password: password,
+                }),
+            });
+
+            const result = await response.json();
+
+            if (result.success === true) {
+                alert("Přihlášení úspěšné!");
+
+                // předáme username + admin flag do App.js
+                onLogin(username, result.admin);
+
+            } else {
+                alert("Špatné přihlašovací údaje!");
+            }
+        } catch (error) {
+            alert("Chyba při komunikaci se serverem");
+            console.error(error);
         }
     };
 
