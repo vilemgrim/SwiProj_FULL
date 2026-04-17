@@ -3,9 +3,20 @@ import React, { useState } from "react";
 function RegisterPage({ goBack }) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
 
     const handleRegister = async (e) => {
         e.preventDefault();
+
+        if (!username || !password || !confirmPassword) {
+            alert("Vyplňte prosím všechna pole!");
+            return;
+        }
+
+        if (password !== confirmPassword) {
+            alert("Hesla se neshodují!");
+            return;
+        }
 
         try {
             const response = await fetch("http://localhost:8080/api/auth/register", {
@@ -23,7 +34,7 @@ function RegisterPage({ goBack }) {
 
             if (result === true) {
                 alert("Registrace úspěšná!");
-                goBack(); // vrátí tě na login nebo menu
+                goBack(); // Vrátí tě do menu
             } else {
                 alert("Uživatel už existuje!");
             }
@@ -55,7 +66,15 @@ function RegisterPage({ goBack }) {
                         style={{ padding: "8px" }}
                     />
 
-                    <button type="submit" style={{ padding: "10px", marginTop: "10px", cursor: "pointer" }}>
+                    <input
+                        type="password"
+                        placeholder="Potvrďte heslo znovu"
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        style={{ padding: "8px" }}
+                    />
+
+                    <button type="submit" style={{ padding: "10px", marginTop: "10px", cursor: "pointer", backgroundColor: "#4CAF50", color: "white", border: "none", borderRadius: "5px" }}>
                         Registrovat
                     </button>
                 </form>

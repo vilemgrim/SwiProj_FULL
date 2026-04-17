@@ -45,19 +45,28 @@ public class UserService {
         return true;
     }
 
-    // Změna hesla
-    public boolean changePassword(String username, String newPassword) {
-        Optional<User> user = userRepository.findByUsername(username);
+    public boolean changeUserPassword(String username, String oldPassword, String newPassword) {
+        Optional<User> userOptional = userRepository.findByUsername(username);
 
-        if (user.isEmpty()) {
+        if (userOptional.isEmpty()) {
             return false;
         }
 
-        String hashed = BCrypt.hashpw(newPassword, BCrypt.gensalt());
-        user.get().setPassword(hashed);
-        userRepository.save(user.get());
+        User user = userOptional.get();
 
-        return true;
+        // 1. ZMĚNA: Použijeme BCrypt pro ověření starého hesla (stejně jako u loginu)
+        if (!BCrypt.checkpw(oldPassword, user.getPassword())) {
+            return false; // Hesla nesedí, tady se to zastaví!
+        }
+
+        // 2. ZMĚNA: Nové heslo musíme před uložením do databáze ZAŠIFROVAT
+        String hashedNewPassword = BCrypt.hashpw(newPassword, BCrypt.gensalt());
+
+        // 3. Uložíme to zašifrované heslo
+        user.setPassword(hashedNewPassword);
+        userRepository.save(user);
+
+        return true; // Úspěch, heslo bylo bezpečně změněno
     }
 
     // Login – vrací true/false

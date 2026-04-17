@@ -2,6 +2,7 @@ package cz.osu.team25.swiproject.controller;
 
 import cz.osu.team25.swiproject.model.User;
 import cz.osu.team25.swiproject.service.UserService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -39,7 +40,19 @@ public class AuthController {
     }
 
     @PostMapping("/change-password")
-    public boolean changePassword(@RequestParam String username, @RequestParam String newPassword) {
-        return userService.changePassword(username, newPassword);
+    public ResponseEntity<Boolean> changePassword(
+            @RequestParam String username,
+            @RequestParam String oldPassword,
+            @RequestParam String newPassword) {
+
+        // Zavoláme mozek (UserService), který jsme vytvořili v kroku 2
+        boolean success = userService.changeUserPassword(username, oldPassword, newPassword);
+
+        if (success) {
+            return ResponseEntity.ok(true);
+        } else {
+            // Vrátíme false (nebo můžete vrátit 400 Bad Request), pokud heslo nesedí
+            return ResponseEntity.ok(false);
+        }
     }
 }
