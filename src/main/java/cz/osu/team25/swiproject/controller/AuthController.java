@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -19,11 +20,13 @@ public class AuthController {
         this.userService = userService;
     }
 
+    // Registrace
     @PostMapping("/register")
     public boolean register(@RequestParam String username, @RequestParam String password) {
         return userService.register(username, password);
     }
 
+    // Login + role
     @PostMapping("/login-info")
     public Map<String, Object> loginInfo(@RequestParam String username, @RequestParam String password) {
         Map<String, Object> result = new HashMap<>();
@@ -39,20 +42,39 @@ public class AuthController {
         return result;
     }
 
+    // Změna hesla
     @PostMapping("/change-password")
     public ResponseEntity<Boolean> changePassword(
             @RequestParam String username,
             @RequestParam String oldPassword,
             @RequestParam String newPassword) {
 
-        // Zavoláme mozek (UserService), který jsme vytvořili v kroku 2
         boolean success = userService.changeUserPassword(username, oldPassword, newPassword);
 
-        if (success) {
-            return ResponseEntity.ok(true);
-        } else {
-            // Vrátíme false (nebo můžete vrátit 400 Bad Request), pokud heslo nesedí
-            return ResponseEntity.ok(false);
-        }
+        return ResponseEntity.ok(success);
+    }
+
+    // 🔥 Seznam všech uživatelů
+    @GetMapping("/users")
+    public List<User> getAllUsers() {
+        return userService.getAllUsers();
+    }
+
+    // 🔥 Povýšení na admina
+    @PostMapping("/make-admin")
+    public boolean makeAdmin(
+            @RequestParam String caller,
+            @RequestParam String targetUser
+    ) {
+        return userService.makeAdmin(caller, targetUser);
+    }
+
+    // 🔥 Odebrání admina (jen superadmin)
+    @PostMapping("/remove-admin")
+    public boolean removeAdmin(
+            @RequestParam String caller,
+            @RequestParam String targetUser
+    ) {
+        return userService.removeAdmin(caller, targetUser);
     }
 }

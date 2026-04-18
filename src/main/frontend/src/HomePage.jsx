@@ -1,6 +1,22 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 function HomePage(props) {
+
+    const navigate = useNavigate();
+
+    // Styl tlačítek v pravém panelu
+    const btnStyle = {
+        width: "100%",
+        padding: "10px",
+        marginBottom: "8px",
+        cursor: "pointer",
+        borderRadius: "6px",
+        border: "1px solid #ccc",
+        background: "#f0f0f0",
+        fontSize: "14px"
+    };
+
     return (
         <div
             style={{
@@ -12,38 +28,95 @@ function HomePage(props) {
                 backgroundColor: "#e8f0fe",
                 textAlign: "center",
                 padding: "20px",
-                position: "relative" // kvůli pravému hornímu rohu
+                position: "relative"
             }}
         >
 
-            {/* Pravý horní roh – nickname + role */}
+            {/* PRAVÝ PANEL – KOMPAKTNÍ BLOK */}
             <div
                 style={{
                     position: "absolute",
                     top: "20px",
                     right: "20px",
-                    textAlign: "right"
+                    width: "260px",
+                    background: "white",
+                    padding: "15px",
+                    borderRadius: "10px",
+                    boxShadow: "0 0 10px rgba(0,0,0,0.15)"
                 }}
             >
-                <div style={{ fontSize: "18px", fontWeight: "bold" }}>
-                    {props.username}
+                {/* Jméno + role */}
+                <div style={{ textAlign: "center", marginBottom: "15px" }}>
+                    <div style={{ fontSize: "20px", fontWeight: "bold" }}>
+                        {props.username}
+                    </div>
+
+                    {props.username === "root" ? (
+                        <div style={{ fontSize: "14px", color: "purple", fontWeight: "bold" }}>
+                            SUPERADMIN
+                        </div>
+                    ) : props.isAdmin ? (
+                        <div style={{ fontSize: "14px", color: "red", fontWeight: "bold" }}>
+                            ADMIN
+                        </div>
+                    ) : null}
                 </div>
 
-                {props.isAdmin && (
-                    <div
-                        style={{
-                            fontSize: "14px",
-                            color: "red",
-                            fontWeight: "bold",
-                            marginTop: "4px"
-                        }}
+                {/* Tlačítka */}
+                {props.isAdmin && props.username !== "root" && (
+                    <>
+                        <button
+                            onClick={() => navigate("/admin/users")}
+                            style={btnStyle}
+                        >
+                            Správa uživatelů
+                        </button>
+
+                        <button
+                            onClick={() => navigate("/admin/questions")}
+                            style={btnStyle}
+                        >
+                            Správa otázek
+                        </button>
+                    </>
+                )}
+
+                {props.username === "root" && (
+                    <>
+                        <button
+                            onClick={() => navigate("/admin/users")}
+                            style={btnStyle}
+                        >
+                            Správa uživatelů
+                        </button>
+
+                        <button
+                            onClick={() => navigate("/admin/questions")}
+                            style={btnStyle}
+                        >
+                            Správa otázek
+                        </button>
+
+                        <button
+                            onClick={() => navigate("/admin/system")}
+                            style={btnStyle}
+                        >
+                            Systémové nastavení
+                        </button>
+                    </>
+                )}
+
+                {!props.isAdmin && props.username !== "root" && (
+                    <button
+                        onClick={() => navigate("/user")}
+                        style={btnStyle}
                     >
-                        ADMIN
-                    </div>
+                        Uživatelský panel
+                    </button>
                 )}
             </div>
 
-            {/* Tvoje původní uvítání */}
+            {/* Uvítání */}
             <h1 style={{ fontSize: "32px", marginBottom: "10px" }}>
                 Vítej, soudruhu!
             </h1>
@@ -53,6 +126,7 @@ function HomePage(props) {
                 Pokud budeš chtít změnit heslo, vrať se do hlavního menu.
             </p>
 
+            {/* Odhlášení */}
             <button
                 onClick={() => props.logout()}
                 style={{
