@@ -5,8 +5,7 @@ import cz.osu.team25.swiproject.repository.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
-import java.util.Map;
-import java.util.HashMap;
+import java.util.List; // ← přidáno
 import java.util.Optional;
 import java.util.Set;
 
@@ -22,11 +21,19 @@ public class UserService {
             "admin3"
     );
 
+    // Jeden jediný superadmin účet
+    private final String SUPERADMIN = "root";
+
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
-    // Registrace – nastaví admina, pokud je to hardcoded účet
+    // Pomocná metoda – ověření superadmina
+    public boolean isSuperAdmin(String username) {
+        return username.equals(SUPERADMIN);
+    }
+
+    // Registrace – nastaví admina, pokud je to hardcoded účet nebo superadmin
     public boolean register(String username, String password) {
         if (userRepository.findByUsername(username).isPresent()) {
             return false;
@@ -39,7 +46,9 @@ public class UserService {
         user.setPassword(hashed);
 
         // Nastavení admin role
-        user.setAdmin(hardcodedAdmins.contains(username));
+        if (hardcodedAdmins.contains(username) || isSuperAdmin(username)) {
+            user.setAdmin(true);
+        }
 
         userRepository.save(user);
         return true;
@@ -54,19 +63,18 @@ public class UserService {
 
         User user = userOptional.get();
 
-        // 1. ZMĚNA: Použijeme BCrypt pro ověření starého hesla (stejně jako u loginu)
+        // Ověření starého hesla
         if (!BCrypt.checkpw(oldPassword, user.getPassword())) {
-            return false; // Hesla nesedí, tady se to zastaví!
+            return false;
         }
 
-        // 2. ZMĚNA: Nové heslo musíme před uložením do databáze ZAŠIFROVAT
+        // Zašifrování nového hesla
         String hashedNewPassword = BCrypt.hashpw(newPassword, BCrypt.gensalt());
 
-        // 3. Uložíme to zašifrované heslo
         user.setPassword(hashedNewPassword);
         userRepository.save(user);
 
-        return true; // Úspěch, heslo bylo bezpečně změněno
+        return true;
     }
 
     // Login – vrací true/false
@@ -81,23 +89,46 @@ public class UserService {
         return userRepository.findByUsername(username).orElse(null);
     }
 
-    // Admin může povýšit jiného uživatele na admina
+    // 🔥 Vrátí všechny uživatele (pro admin panel)
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+
+    // Admin nebo superadmin může povýšit jiného uživatele na admina
     public boolean makeAdmin(String caller, String targetUser) {
 
-        // 1) ověř, že volající je admin
-        if (!hardcodedAdmins.contains(caller)) {
+        // Ověření oprávnění
+        if (!hardcodedAdmins.contains(caller) && !isSuperAdmin(caller)) {
             return false;
         }
 
-        // 2) najdi cílového uživatele
         Optional<User> user = userRepository.findByUsername(targetUser);
 
         if (user.isEmpty()) {
             return false;
         }
 
-        // 3) nastav admina
         user.get().setAdmin(true);
+        userRepository.save(user.get());
+
+        return true;
+    }
+
+    // Superadmin může odebrat admin práva
+    public boolean removeAdmin(String caller, String targetUser) {
+
+        // Jen superadmin může odebírat admin práva
+        if (!isSuperAdmin(caller)) {
+            return false;
+        }
+
+        Optional<User> user = userRepository.findByUsername(targetUser);
+
+        if (user.isEmpty()) {
+            return false;
+        }
+
+        user.get().setAdmin(false);
         userRepository.save(user.get());
 
         return true;
