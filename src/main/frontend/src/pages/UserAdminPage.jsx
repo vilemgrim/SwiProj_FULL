@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import AdminMenu from "../components/AdminMenu";
 
 function UserAdminPage({ username }) {
     const [users, setUsers] = useState([]);
@@ -34,7 +35,6 @@ function UserAdminPage({ username }) {
         }).then(() => refreshUsers());
     };
 
-    // Styl hezkých tlačítek
     const btn = {
         padding: "6px 12px",
         borderRadius: "6px",
@@ -51,17 +51,6 @@ function UserAdminPage({ username }) {
         background: "#d9534f"
     };
 
-    const menuBtn = {
-        width: "100%",
-        padding: "10px",
-        marginBottom: "10px",
-        cursor: "pointer",
-        borderRadius: "6px",
-        border: "1px solid #ccc",
-        background: "#f0f0f0",
-        fontSize: "14px"
-    };
-
     return (
         <div
             style={{
@@ -76,54 +65,8 @@ function UserAdminPage({ username }) {
             }}
         >
 
-            {/* 🔥 HORNÍ ADMIN MENU – STEJNÉ JAKO NA HOMEPAGE */}
-            <div
-                style={{
-                    position: "absolute",
-                    top: "20px",
-                    right: "20px",
-                    width: "260px",
-                    background: "white",
-                    padding: "15px",
-                    borderRadius: "10px",
-                    boxShadow: "0 0 10px rgba(0,0,0,0.15)"
-                }}
-            >
-                <div style={{ textAlign: "center", marginBottom: "15px" }}>
-                    <div style={{ fontSize: "20px", fontWeight: "bold" }}>
-                        {username}
-                    </div>
-
-                    {username === "root" ? (
-                        <div style={{ fontSize: "14px", color: "purple", fontWeight: "bold" }}>
-                            SUPERADMIN
-                        </div>
-                    ) : (
-                        <div style={{ fontSize: "14px", color: "red", fontWeight: "bold" }}>
-                            ADMIN
-                        </div>
-                    )}
-                </div>
-
-                {/* TLAČÍTKA MENU */}
-                <button style={menuBtn} onClick={() => navigate("/home")}>
-                    Hlavní stránka
-                </button>
-
-                <button style={menuBtn} onClick={() => navigate("/admin/users")}>
-                    Správa uživatelů
-                </button>
-
-                <button style={menuBtn} onClick={() => navigate("/admin/questions")}>
-                    Správa otázek
-                </button>
-
-                {username === "root" && (
-                    <button style={menuBtn} onClick={() => navigate("/admin/system")}>
-                        Systémové nastavení
-                    </button>
-                )}
-            </div>
+            {/* 🔥 JEDNOTNÉ ADMIN MENU */}
+            <AdminMenu username={username} isAdmin={true} />
 
             {/* HLAVNÍ OBSAH */}
             <div

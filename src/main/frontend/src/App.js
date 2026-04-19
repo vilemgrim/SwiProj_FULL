@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import LoginPage from "./LoginPage";
 import RegisterPage from "./RegisterPage";
 import ChangePasswordPage from "./ChangePasswordPage";
-import HomePage from "./HomePage";
+import HomePage from "./pages/HomePage";
 import UserAdminPage from "./pages/UserAdminPage";
 
 function AppWrapper() {
@@ -152,7 +152,12 @@ function App() {
             {/* ADMIN – Správa uživatelů */}
             <Route
                 path="/admin/users"
-                element={<UserAdminPage username={username} />}
+                element={
+                    <UserAdminPage
+                        username={username}
+                        isAdmin={isAdmin}
+                    />
+                }
             />
 
         </Routes>
