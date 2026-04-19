@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function QuizPage() {
     const [questions, setQuestions] = useState([]);
@@ -9,8 +10,13 @@ function QuizPage() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
 
+    const navigate = useNavigate();
+
+    const params = new URLSearchParams(window.location.search);
+    const quizType = params.get("type") || "EU_CAPITALS";
+
     useEffect(() => {
-        fetch("http://localhost:8080/api/questions/quiz?quiz=EU_CAPITALS")
+        fetch(`http://localhost:8080/api/questions/quiz?quiz=${quizType}`)
             .then(res => {
                 if (!res.ok) throw new Error("Backend error");
                 return res.json();
@@ -24,7 +30,7 @@ function QuizPage() {
                 setError(true);
                 setLoading(false);
             });
-    }, []);
+    }, [quizType]);
 
     if (loading) {
         return <div style={{ textAlign: "center", marginTop: "40px" }}>Načítám otázky...</div>;
@@ -66,7 +72,19 @@ function QuizPage() {
         }
     };
 
-    // 🔥 TADY JE NOVÝ BLOK S TLAČÍTKEM ZPĚT
+    const skipQuestion = () => {
+        if (index + 1 < questions.length) {
+            setIndex(index + 1);
+            setSelected(null);
+        } else {
+            setFinished(true);
+        }
+    };
+
+    const endQuiz = () => {
+        setFinished(true);
+    };
+
     if (finished) {
         return (
             <div style={{ textAlign: "center", marginTop: "40px" }}>
@@ -74,7 +92,7 @@ function QuizPage() {
                 <p>Skóre: {score} / {questions.length}</p>
 
                 <button
-                    onClick={() => window.location.href = "/home"}
+                    onClick={() => navigate("/home")}
                     style={{
                         marginTop: "20px",
                         padding: "10px 20px",
@@ -123,22 +141,53 @@ function QuizPage() {
                 </button>
             ))}
 
-            {selected !== null && (
+            <div style={{ marginTop: "20px" }}>
+                {selected !== null && (
+                    <button
+                        onClick={nextQuestion}
+                        style={{
+                            padding: "10px 20px",
+                            background: "#007bff",
+                            color: "white",
+                            border: "none",
+                            borderRadius: "6px",
+                            cursor: "pointer",
+                            marginRight: "10px"
+                        }}
+                    >
+                        Další otázka
+                    </button>
+                )}
+
                 <button
-                    onClick={nextQuestion}
+                    onClick={skipQuestion}
                     style={{
-                        marginTop: "20px",
                         padding: "10px 20px",
-                        background: "#007bff",
+                        background: "#ffc107",
+                        color: "black",
+                        border: "none",
+                        borderRadius: "6px",
+                        cursor: "pointer",
+                        marginRight: "10px"
+                    }}
+                >
+                    Přeskočit
+                </button>
+
+                <button
+                    onClick={endQuiz}
+                    style={{
+                        padding: "10px 20px",
+                        background: "#dc3545",
                         color: "white",
                         border: "none",
                         borderRadius: "6px",
                         cursor: "pointer"
                     }}
                 >
-                    Další otázka
+                    Ukončit kvíz
                 </button>
-            )}
+            </div>
         </div>
     );
 }

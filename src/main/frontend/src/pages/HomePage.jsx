@@ -6,72 +6,108 @@ function HomePage(props) {
 
     const navigate = useNavigate();
 
+    // 🔥 Jednoduchý seznam kvízů – snadno rozšiřitelný
+    const quizzes = [
+        {
+            id: "EU_CAPITALS",
+            title: "Hlavní města Evropy",
+            description: "Otestuj si znalosti evropských hlavních měst."
+        },
+        {
+            id: "ASIA_CAPITALS",
+            title: "Hlavní města Asie",
+            description: "Poznáš hlavní města asijských států?"
+        },
+        {
+            id: "AFRICA_CAPITALS",
+            title: "Hlavní města Afriky",
+            description: "Prověř si znalosti afrických metropolí."
+        }
+    ];
+
+    const startQuiz = (quizId) => {
+        navigate(`/quiz?type=${quizId}`);
+    };
+
     return (
         <div
             style={{
-                height: "100vh",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                flexDirection: "column",
+                minHeight: "100vh",
                 backgroundColor: "#e8f0fe",
-                textAlign: "center",
                 padding: "20px",
                 position: "relative"
             }}
         >
 
-            {/* 🔥 JEDNOTNÉ ADMIN MENU */}
-            <AdminMenu username={props.username} isAdmin={props.isAdmin} />
+            {/* 🔥 ADMIN MENU – včetně logout */}
+            <AdminMenu
+                username={props.username}
+                isAdmin={props.isAdmin}
+                logout={props.logout}
+            />
 
             {/* Uvítání */}
-            <h1 style={{ fontSize: "32px", marginBottom: "10px" }}>
-                Vítej, soudruhu!
-            </h1>
+            <div style={{ textAlign: "center", marginTop: "40px" }}>
+                <h1 style={{ fontSize: "32px", marginBottom: "10px" }}>
+                    Vítej, soudruhu!
+                </h1>
 
-            <p style={{ fontSize: "18px", maxWidth: "500px", marginBottom: "30px", color: "#333" }}>
-                Komise tvé přihlášení schválila.
-                Pokud budeš chtít změnit heslo, vrať se do hlavního menu.
-            </p>
+                <p style={{
+                    fontSize: "18px",
+                    maxWidth: "600px",
+                    margin: "0 auto 40px auto",
+                    color: "#333"
+                }}>
+                    Komise tvé přihlášení schválila.
+                    Vyber si kvíz a ukaž, co v tobě je.
+                </p>
+            </div>
 
-            {/* 🔥 NOVÉ TLAČÍTKO – SPUSTIT KVÍZ */}
-            <button
-                onClick={() => navigate("/quiz")}
+            {/* 🔥 GRID KARTIČEK S KVÍZY */}
+            <div
                 style={{
-                    padding: "12px 24px",
-                    cursor: "pointer",
-                    background: "#0275d8",
-                    color: "white",
-                    border: "none",
-                    borderRadius: "6px",
-                    fontSize: "16px",
-                    marginBottom: "20px",
-                    transition: "0.2s"
+                    display: "grid",
+                    gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+                    gap: "20px",
+                    maxWidth: "1000px",
+                    margin: "0 auto"
                 }}
-                onMouseOver={(e) => (e.target.style.background = "#025aa5")}
-                onMouseOut={(e) => (e.target.style.background = "#0275d8")}
             >
-                Spustit kvíz
-            </button>
+                {quizzes.map((quiz) => (
+                    <div
+                        key={quiz.id}
+                        style={{
+                            padding: "20px",
+                            borderRadius: "10px",
+                            background: "white",
+                            boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+                            textAlign: "center",
+                            transition: "0.2s"
+                        }}
+                        onMouseOver={(e) => e.currentTarget.style.transform = "scale(1.03)"}
+                        onMouseOut={(e) => e.currentTarget.style.transform = "scale(1)"}
+                    >
+                        <h2 style={{ marginBottom: "10px" }}>{quiz.title}</h2>
+                        <p style={{ minHeight: "50px", color: "#555" }}>{quiz.description}</p>
 
-            {/* Odhlášení */}
-            <button
-                onClick={() => props.logout()}
-                style={{
-                    padding: "12px 24px",
-                    cursor: "pointer",
-                    background: "#d9534f",
-                    color: "white",
-                    border: "none",
-                    borderRadius: "6px",
-                    fontSize: "16px",
-                    transition: "0.2s"
-                }}
-                onMouseOver={(e) => (e.target.style.background = "#c9302c")}
-                onMouseOut={(e) => (e.target.style.background = "#d9534f")}
-            >
-                Odhlásit se
-            </button>
+                        <button
+                            onClick={() => startQuiz(quiz.id)}
+                            style={{
+                                marginTop: "15px",
+                                padding: "10px 20px",
+                                background: "#0275d8",
+                                color: "white",
+                                border: "none",
+                                borderRadius: "6px",
+                                cursor: "pointer",
+                                fontSize: "16px"
+                            }}
+                        >
+                            Spustit kvíz
+                        </button>
+                    </div>
+                ))}
+            </div>
         </div>
     );
 }
