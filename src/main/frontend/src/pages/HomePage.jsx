@@ -34,6 +34,26 @@ function HomePage(props) {
                 Pokud budeš chtít změnit heslo, vrať se do hlavního menu.
             </p>
 
+            {/* 🔥 NOVÉ TLAČÍTKO – SPUSTIT KVÍZ */}
+            <button
+                onClick={() => navigate("/quiz")}
+                style={{
+                    padding: "12px 24px",
+                    cursor: "pointer",
+                    background: "#0275d8",
+                    color: "white",
+                    border: "none",
+                    borderRadius: "6px",
+                    fontSize: "16px",
+                    marginBottom: "20px",
+                    transition: "0.2s"
+                }}
+                onMouseOver={(e) => (e.target.style.background = "#025aa5")}
+                onMouseOut={(e) => (e.target.style.background = "#0275d8")}
+            >
+                Spustit kvíz
+            </button>
+
             {/* Odhlášení */}
             <button
                 onClick={() => props.logout()}
