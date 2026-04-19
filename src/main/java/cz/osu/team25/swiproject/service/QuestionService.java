@@ -21,13 +21,15 @@ public class QuestionService {
         // všechny otázky z daného kvízu
         List<Question> all = questionRepository.findByQuiz(quiz);
 
-        // náhodných X otázek
+        // náhodných X otázek (unikátních)
         List<Question> selected = questionRepository.getRandomQuestions(quiz, count);
 
-        // seznam všech správných odpovědí
-        List<String> allCorrectAnswers = all.stream()
-                .map(Question::getCorrect)
-                .toList();
+        // unikátní správné odpovědi pouze z daného kvízu
+        Set<String> uniqueAnswers = new HashSet<>();
+        for (Question q : all) {
+            uniqueAnswers.add(q.getCorrect());
+        }
+        List<String> allCorrectAnswers = new ArrayList<>(uniqueAnswers);
 
         List<Map<String, Object>> result = new ArrayList<>();
 
@@ -39,17 +41,17 @@ public class QuestionService {
             List<String> options = new ArrayList<>();
             options.add(correct);
 
-            // náhodné jiné odpovědi
+            // náhodné jiné odpovědi (unikátní, pouze z daného kvízu)
             List<String> wrong = new ArrayList<>(allCorrectAnswers);
-            wrong.remove(correct);
+            wrong.remove(correct); // odstraníme správnou odpověď
             Collections.shuffle(wrong);
 
-            // přidáme tolik odpovědí, kolik máme
+            // přidáme 3 různé špatné odpovědi
             for (int i = 0; i < Math.min(3, wrong.size()); i++) {
                 options.add(wrong.get(i));
             }
 
-            // pokud máme méně než 4 možnosti, doplníme placeholdery
+            // pokud by bylo málo odpovědí v DB, doplníme placeholdery
             while (options.size() < 4) {
                 options.add("N/A");
             }

@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-function AdminMenu({ username, isAdmin }) {
+function AdminMenu({ username, isAdmin, logout }) {
     const navigate = useNavigate();
 
     return (
@@ -59,6 +59,25 @@ function AdminMenu({ username, isAdmin }) {
                     Systémové nastavení
                 </button>
             )}
+
+            {/* 🔥 NOVÉ TLAČÍTKO – ODHLÁŠENÍ */}
+            <button
+                onClick={logout}
+                style={{
+                    width: "100%",
+                    padding: "10px",
+                    marginTop: "10px",
+                    cursor: "pointer",
+                    borderRadius: "6px",
+                    border: "1px solid #ccc",
+                    background: "#d9534f",
+                    color: "white",
+                    fontSize: "14px",
+                    fontWeight: "bold"
+                }}
+            >
+                Odhlásit se
+            </button>
         </div>
     );
 }
