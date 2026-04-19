@@ -6,6 +6,7 @@ import RegisterPage from "./RegisterPage";
 import ChangePasswordPage from "./ChangePasswordPage";
 import HomePage from "./pages/HomePage";
 import UserAdminPage from "./pages/UserAdminPage";
+import QuizPage from "./pages/QuizPage";   // 🔥 NOVÝ IMPORT
 
 function AppWrapper() {
     return (
@@ -158,6 +159,12 @@ function App() {
                         isAdmin={isAdmin}
                     />
                 }
+            />
+
+            {/* 🔥 QUIZ PAGE */}
+            <Route
+                path="/quiz"
+                element={<QuizPage />}
             />
 
         </Routes>

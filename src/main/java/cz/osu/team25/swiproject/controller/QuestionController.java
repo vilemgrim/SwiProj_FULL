@@ -1,23 +1,25 @@
 package cz.osu.team25.swiproject.controller;
 
-import cz.osu.team25.swiproject.model.Question;
 import cz.osu.team25.swiproject.service.QuestionService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/questions")
+@CrossOrigin(origins = "*")   // 🔥 POVOLÍ VŠECHNY FRONTENDY
 public class QuestionController {
 
-    @Autowired
-    private QuestionService questionService;
+    private final QuestionService questionService;
 
-    @GetMapping("/play")
-    public List<Question> getQuizQuestions() {
-        return questionService.getRandomQuestions(15);
+    public QuestionController(QuestionService questionService) {
+        this.questionService = questionService;
+    }
+
+    @GetMapping("/quiz")
+    public List<Map<String, Object>> getQuiz(@RequestParam String quiz) {
+        System.out.println("QUIZ ENDPOINT CALLED: " + quiz); // 🔥 DEBUG
+        return questionService.getRandomQuizWithRandomOptions(quiz, 10);
     }
 }

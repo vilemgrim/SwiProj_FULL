@@ -1,8 +1,50 @@
-INSERT INTO question (text, option1, option2, option3, option4, correct_answer_index, category)
-VALUES ('Jak se jmenuje maskot Javy?', 'Rex', 'Duke', 'Tux', 'Moby', 2, 'Java');
-
-INSERT INTO question (text, option1, option2, option3, option4, correct_answer_index, category)
-VALUES ('Který rok vznikla Java?', '1991', '1995', '1998', '2000', 2, 'Java');
-
-INSERT INTO question (text, option1, option2, option3, option4, correct_answer_index, category)
-VALUES('Která společnost vlastní Javu?', 'Microsoft', 'Roblox', 'Oracle', 'Popeyes', 3, 'Java');
+INSERT INTO questions (quiz, question, correct) VALUES ('EU_CAPITALS', 'Jaké je hlavní město Albánie?', 'Tirana');
+INSERT INTO questions (quiz, question, correct) VALUES ('EU_CAPITALS', 'Jaké je hlavní město Andorry?', 'Andorra la Vella');
+INSERT INTO questions (quiz, question, correct) VALUES ('EU_CAPITALS', 'Jaké je hlavní město Arménie?', 'Jerevan');
+INSERT INTO questions (quiz, question, correct) VALUES ('EU_CAPITALS', 'Jaké je hlavní město Ázerbájdžánu?', 'Baku');
+INSERT INTO questions (quiz, question, correct) VALUES ('EU_CAPITALS', 'Jaké je hlavní město Běloruska?', 'Minsk');
+INSERT INTO questions (quiz, question, correct) VALUES ('EU_CAPITALS', 'Jaké je hlavní město Belgie?', 'Brusel');
+INSERT INTO questions (quiz, question, correct) VALUES ('EU_CAPITALS', 'Jaké je hlavní město Bosny a Hercegoviny?', 'Sarajevo');
+INSERT INTO questions (quiz, question, correct) VALUES ('EU_CAPITALS', 'Jaké je hlavní město Bulharska?', 'Sofie');
+INSERT INTO questions (quiz, question, correct) VALUES ('EU_CAPITALS', 'Jaké je hlavní město Chorvatska?', 'Záhřeb');
+INSERT INTO questions (quiz, question, correct) VALUES ('EU_CAPITALS', 'Jaké je hlavní město Kypru?', 'Nikósie');
+INSERT INTO questions (quiz, question, correct) VALUES ('EU_CAPITALS', 'Jaké je hlavní město Česka?', 'Praha');
+INSERT INTO questions (quiz, question, correct) VALUES ('EU_CAPITALS', 'Jaké je hlavní město Dánska?', 'Kodaň');
+INSERT INTO questions (quiz, question, correct) VALUES ('EU_CAPITALS', 'Jaké je hlavní město Estonska?', 'Tallinn');
+INSERT INTO questions (quiz, question, correct) VALUES ('EU_CAPITALS', 'Jaké je hlavní město Finska?', 'Helsinky');
+INSERT INTO questions (quiz, question, correct) VALUES ('EU_CAPITALS', 'Jaké je hlavní město Francie?', 'Paříž');
+INSERT INTO questions (quiz, question, correct) VALUES ('EU_CAPITALS', 'Jaké je hlavní město Gruzie?', 'Tbilisi');
+INSERT INTO questions (quiz, question, correct) VALUES ('EU_CAPITALS', 'Jaké je hlavní město Německa?', 'Berlín');
+INSERT INTO questions (quiz, question, correct) VALUES ('EU_CAPITALS', 'Jaké je hlavní město Řecka?', 'Atény');
+INSERT INTO questions (quiz, question, correct) VALUES ('EU_CAPITALS', 'Jaké je hlavní město Maďarska?', 'Budapešť');
+INSERT INTO questions (quiz, question, correct) VALUES ('EU_CAPITALS', 'Jaké je hlavní město Islandu?', 'Reykjavík');
+INSERT INTO questions (quiz, question, correct) VALUES ('EU_CAPITALS', 'Jaké je hlavní město Irska?', 'Dublin');
+INSERT INTO questions (quiz, question, correct) VALUES ('EU_CAPITALS', 'Jaké je hlavní město Itálie?', 'Řím');
+INSERT INTO questions (quiz, question, correct) VALUES ('EU_CAPITALS', 'Jaké je hlavní město Kazachstánu?', 'Astana');
+INSERT INTO questions (quiz, question, correct) VALUES ('EU_CAPITALS', 'Jaké je hlavní město Kosova?', 'Priština');
+INSERT INTO questions (quiz, question, correct) VALUES ('EU_CAPITALS', 'Jaké je hlavní město Lotyšska?', 'Riga');
+INSERT INTO questions (quiz, question, correct) VALUES ('EU_CAPITALS', 'Jaké je hlavní město Lichtenštejnska?', 'Vaduz');
+INSERT INTO questions (quiz, question, correct) VALUES ('EU_CAPITALS', 'Jaké je hlavní město Litvy?', 'Vilnius');
+INSERT INTO questions (quiz, question, correct) VALUES ('EU_CAPITALS', 'Jaké je hlavní město Lucemburska?', 'Lucemburk');
+INSERT INTO questions (quiz, question, correct) VALUES ('EU_CAPITALS', 'Jaké je hlavní město Malty?', 'Valletta');
+INSERT INTO questions (quiz, question, correct) VALUES ('EU_CAPITALS', 'Jaké je hlavní město Moldavska?', 'Kišiněv');
+INSERT INTO questions (quiz, question, correct) VALUES ('EU_CAPITALS', 'Jaké je hlavní město Monaka?', 'Monako');
+INSERT INTO questions (quiz, question, correct) VALUES ('EU_CAPITALS', 'Jaké je hlavní město Černé Hory?', 'Podgorica');
+INSERT INTO questions (quiz, question, correct) VALUES ('EU_CAPITALS', 'Jaké je hlavní město Nizozemska?', 'Amsterdam');
+INSERT INTO questions (quiz, question, correct) VALUES ('EU_CAPITALS', 'Jaké je hlavní město Severní Makedonie?', 'Skopje');
+INSERT INTO questions (quiz, question, correct) VALUES ('EU_CAPITALS', 'Jaké je hlavní město Norska?', 'Oslo');
+INSERT INTO questions (quiz, question, correct) VALUES ('EU_CAPITALS', 'Jaké je hlavní město Polska?', 'Varšava');
+INSERT INTO questions (quiz, question, correct) VALUES ('EU_CAPITALS', 'Jaké je hlavní město Portugalska?', 'Lisabon');
+INSERT INTO questions (quiz, question, correct) VALUES ('EU_CAPITALS', 'Jaké je hlavní město Rumunska?', 'Bukurešť');
+INSERT INTO questions (quiz, question, correct) VALUES ('EU_CAPITALS', 'Jaké je hlavní město Ruska?', 'Moskva');
+INSERT INTO questions (quiz, question, correct) VALUES ('EU_CAPITALS', 'Jaké je hlavní město San Marina?', 'San Marino');
+INSERT INTO questions (quiz, question, correct) VALUES ('EU_CAPITALS', 'Jaké je hlavní město Srbska?', 'Bělehrad');
+INSERT INTO questions (quiz, question, correct) VALUES ('EU_CAPITALS', 'Jaké je hlavní město Slovenska?', 'Bratislava');
+INSERT INTO questions (quiz, question, correct) VALUES ('EU_CAPITALS', 'Jaké je hlavní město Slovinska?', 'Lublaň');
+INSERT INTO questions (quiz, question, correct) VALUES ('EU_CAPITALS', 'Jaké je hlavní město Španělska?', 'Madrid');
+INSERT INTO questions (quiz, question, correct) VALUES ('EU_CAPITALS', 'Jaké je hlavní město Švédska?', 'Stockholm');
+INSERT INTO questions (quiz, question, correct) VALUES ('EU_CAPITALS', 'Jaké je hlavní město Švýcarska?', 'Bern');
+INSERT INTO questions (quiz, question, correct) VALUES ('EU_CAPITALS', 'Jaké je hlavní město Turecka?', 'Ankara');
+INSERT INTO questions (quiz, question, correct) VALUES ('EU_CAPITALS', 'Jaké je hlavní město Ukrajiny?', 'Kyjev');
+INSERT INTO questions (quiz, question, correct) VALUES ('EU_CAPITALS', 'Jaké je hlavní město Vatikánu?', 'Vatikán');
+INSERT INTO questions (quiz, question, correct) VALUES ('EU_CAPITALS', 'Jaké je hlavní město Velké Británie?', 'Londýn');
