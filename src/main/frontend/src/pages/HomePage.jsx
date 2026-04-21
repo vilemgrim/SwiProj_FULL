@@ -6,7 +6,7 @@ function HomePage(props) {
 
     const navigate = useNavigate();
 
-    // 🔥 Jednoduchý seznam kvízů – snadno rozšiřitelný
+    // Kompletní seznam všech 7 kvízů
     const quizzes = [
         {
             id: "EU_CAPITALS",
@@ -22,6 +22,26 @@ function HomePage(props) {
             id: "AFRICA_CAPITALS",
             title: "Hlavní města Afriky",
             description: "Prověř si znalosti afrických metropolí."
+        },
+        {
+            id: "NORTH_AMERICA_CAPITALS",
+            title: "Hlavní města Severní Ameriky",
+            description: "Prověř si znalosti severoamerických států."
+        },
+        {
+            id: "SOUTH_AMERICA_CAPITALS",
+            title: "Hlavní města Jižní Ameriky",
+            description: "Jak dobře znáš hlavní města Jižní Ameriky?"
+        },
+        {
+            id: "OCEANIA_CAPITALS",
+            title: "Hlavní města Oceánie",
+            description: "Vyzkoušej si znalosti ostrovních států Oceánie."
+        },
+        {
+            id: "WORLD_CAPITALS",
+            title: "Hlavní města celého světa",
+            description: "Ultimátní test znalostí všech světových hlavních měst."
         }
     ];
 
@@ -39,7 +59,7 @@ function HomePage(props) {
             }}
         >
 
-            {/* 🔥 ADMIN MENU – včetně logout */}
+            {/* ADMIN MENU – včetně logout */}
             <AdminMenu
                 username={props.username}
                 isAdmin={props.isAdmin}
@@ -63,7 +83,7 @@ function HomePage(props) {
                 </p>
             </div>
 
-            {/* 🔥 GRID KARTIČEK S KVÍZY */}
+            {/* GRID KARTIČEK S KVÍZY */}
             <div
                 style={{
                     display: "grid",
