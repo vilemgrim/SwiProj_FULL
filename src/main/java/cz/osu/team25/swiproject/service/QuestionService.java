@@ -18,7 +18,9 @@ public class QuestionService {
     // Hlavní logika pro generování kvízu
     public List<Map<String, Object>> getRandomQuizWithRandomOptions(String quiz, int count) {
 
-        // SPECIÁLNÍ KATEGORIE: celý svět
+        // ==========================================
+        // 1. SPECIÁLNÍ KATEGORIE: CELÝ SVĚT
+        // ==========================================
         if (quiz.equals("WORLD_CAPITALS")) {
 
             // spojíme všechny otázky ze všech kvízů
@@ -52,13 +54,25 @@ public class QuestionService {
                 List<String> options = new ArrayList<>();
                 options.add(correct);
 
-                List<String> wrong = new ArrayList<>(allCorrectAnswers);
-                wrong.remove(correct);
-                Collections.shuffle(wrong);
+                // --- VÝHYBKA (HYBRIDNÍ SYSTÉM) ---
+                if (q.getWrongAnswers() != null && q.getWrongAnswers().size() >= 3) {
+                    // 🟢 NOVÝ SYSTÉM: Použijeme špatné odpovědi zadané adminem
+                    List<String> manualWrongs = new ArrayList<>(q.getWrongAnswers());
+                    Collections.shuffle(manualWrongs);
+                    for (int i = 0; i < 3; i++) {
+                        options.add(manualWrongs.get(i));
+                    }
+                } else {
+                    // 🟠 STARÝ SYSTÉM: Náhodné jiné správné odpovědi
+                    List<String> wrong = new ArrayList<>(allCorrectAnswers);
+                    wrong.remove(correct);
+                    Collections.shuffle(wrong);
 
-                for (int i = 0; i < Math.min(3, wrong.size()); i++) {
-                    options.add(wrong.get(i));
+                    for (int i = 0; i < Math.min(3, wrong.size()); i++) {
+                        options.add(wrong.get(i));
+                    }
                 }
+                // ---------------------------------
 
                 while (options.size() < 4) {
                     options.add("N/A");
@@ -77,7 +91,9 @@ public class QuestionService {
             return result;
         }
 
-        // STANDARDNÍ KATEGORIE (Evropa, Asie, Afrika, Amerika, Oceánie)
+        // ==========================================
+        // 2. STANDARDNÍ KATEGORIE (Vč. nových dynamických)
+        // ==========================================
 
         // všechny otázky z daného kvízu
         List<Question> all = questionRepository.findByQuiz(quiz);
@@ -102,25 +118,34 @@ public class QuestionService {
             List<String> options = new ArrayList<>();
             options.add(correct);
 
-            // náhodné jiné odpovědi (unikátní, pouze z daného kvízu)
-            List<String> wrong = new ArrayList<>(allCorrectAnswers);
-            wrong.remove(correct); // odstraníme správnou odpověď
-            Collections.shuffle(wrong);
+            // --- VÝHYBKA (HYBRIDNÍ SYSTÉM) ---
+            if (q.getWrongAnswers() != null && q.getWrongAnswers().size() >= 3) {
+                // 🟢 NOVÝ SYSTÉM: Použijeme špatné odpovědi zadané adminem
+                List<String> manualWrongs = new ArrayList<>(q.getWrongAnswers());
+                Collections.shuffle(manualWrongs);
+                for (int i = 0; i < 3; i++) {
+                    options.add(manualWrongs.get(i));
+                }
+            } else {
+                // 🟠 STARÝ SYSTÉM: Náhodné jiné správné odpovědi
+                List<String> wrong = new ArrayList<>(allCorrectAnswers);
+                wrong.remove(correct); // odstraníme správnou odpověď
+                Collections.shuffle(wrong);
 
-            // přidáme 3 různé špatné odpovědi
-            for (int i = 0; i < Math.min(3, wrong.size()); i++) {
-                options.add(wrong.get(i));
+                // přidáme 3 různé špatné odpovědi
+                for (int i = 0; i < Math.min(3, wrong.size()); i++) {
+                    options.add(wrong.get(i));
+                }
             }
+            // ---------------------------------
 
             // pokud by bylo málo odpovědí v DB, doplníme placeholdery
             while (options.size() < 4) {
                 options.add("N/A");
             }
 
-            // zamíchat pořadí
             Collections.shuffle(options);
 
-            // výsledek pro jednu otázku
             Map<String, Object> item = new HashMap<>();
             item.put("question", q.getQuestion());
             item.put("options", options);

@@ -11,11 +11,28 @@ function MyResultsPage({ username, isAdmin, logout }) {
 
     const loadResults = () => {
         fetch(`http://localhost:8080/api/results/user/${username}`)
-            .then(res => res.json())
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error(`Server vrátil chybu: ${res.status}`);
+                }
+                return res.json();
+            })
             .then(data => {
-                const sorted = data.sort((a, b) => new Date(b.playedAt) - new Date(a.playedAt));
-                setResults(sorted);
-                setFiltered(sorted);
+                if (Array.isArray(data)) {
+                    const sorted = data.sort((a, b) => new Date(b.playedAt) - new Date(a.playedAt));
+                    setResults(sorted);
+                    setFiltered(sorted);
+                } else {
+                    console.warn("Backend nevrátil pole výsledků. Přišlo toto:", data);
+                    setResults([]);
+                    setFiltered([]);
+                }
+                setPage(1);
+            })
+            .catch(err => {
+                console.error("Chyba při stahování výsledků:", err);
+                setResults([]);
+                setFiltered([]);
                 setPage(1);
             });
     };

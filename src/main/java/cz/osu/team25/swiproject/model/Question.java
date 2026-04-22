@@ -2,6 +2,9 @@ package cz.osu.team25.swiproject.model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "questions")
 public class Question {
@@ -27,4 +30,16 @@ public class Question {
 
     public String getCorrect() { return correct; }
     public void setCorrect(String correct) { this.correct = correct; }
+    @ElementCollection
+    // Tímto řekneme: "Vytvoř novou tabulku 'question_wrong_answers' a propoj ji přes 'question_id'"
+    @CollectionTable(
+            name = "question_wrong_answers",
+            joinColumns = @JoinColumn(name = "question_id")
+    )
+    // Tímto řekneme, jak se bude jmenovat ten samotný sloupeček s textem špatné odpovědi
+    @Column(name = "answer_text")
+    private List<String> wrongAnswers = new ArrayList<>();
+
+    public List<String> getWrongAnswers() { return wrongAnswers; }
+    public void setWrongAnswers(List<String> wrongAnswers) { this.wrongAnswers = wrongAnswers; }
 }
