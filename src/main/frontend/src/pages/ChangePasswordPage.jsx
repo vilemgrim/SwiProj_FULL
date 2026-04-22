@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 function ChangePasswordPage({ goBack }) {
-    // Potřebujeme vědět, komu to heslo měníme (pokud ještě nemáte sessions/tokeny)
     const [username, setUsername] = useState("");
     const [oldPassword, setOldPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
@@ -10,20 +9,20 @@ function ChangePasswordPage({ goBack }) {
     const handleChangePassword = async (e) => {
         e.preventDefault();
 
-        // 1. Kontrola prázdných polí
+        //Kontrola prázdných polí
         if (!username || !oldPassword || !newPassword || !confirmNewPassword) {
             alert("Vyplňte prosím všechna pole!");
             return;
         }
 
-        // 2. Kontrola shody nového hesla
+        //Kontrola shody nového hesla
         if (newPassword !== confirmNewPassword) {
             alert("❌ Nová hesla se neshodují!");
             return;
         }
 
         try {
-            // Voláme backend (cestu si případně upravte podle vašeho AuthControlleru)
+            // Voláme backend
             const response = await fetch("http://localhost:8080/api/auth/change-password", {
                 method: "POST",
                 headers: {
@@ -40,7 +39,7 @@ function ChangePasswordPage({ goBack }) {
 
             if (result === true) {
                 alert("✅ Heslo bylo úspěšně změněno!");
-                goBack(); // Vrátí uživatele do menu
+                goBack();
             } else {
                 alert("❌ Změna se nezdařila! Zřejmě jste zadali špatné staré heslo.");
             }

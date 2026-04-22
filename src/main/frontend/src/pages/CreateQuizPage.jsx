@@ -14,7 +14,7 @@ function CreateQuizPage({ username, isAdmin, logout }) {
             return;
         }
 
-        // Automaticky převedeme kód na velká písmena bez mezer (např. "moje java" -> "MOJE_JAVA")
+        // Automatický převod kódu na velká písmena bez mezer (např. "moje java" -> "MOJE_JAVA")
         const formattedCode = code.trim().toUpperCase().replace(/\s+/g, '_');
 
         try {

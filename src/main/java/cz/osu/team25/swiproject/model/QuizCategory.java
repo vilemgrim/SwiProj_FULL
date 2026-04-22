@@ -10,19 +10,18 @@ public class QuizCategory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Kódové označení, např. "EU_CAPITALS" (to, co už máte v tabulce questions)
+    // Kódové označení (např "EU_CAPITALS")
     @Column(nullable = false, unique = true)
     private String code;
 
-    // Hezký název pro uživatele, např. "Hlavní města Evropy"
+    // Hezký název, např. "Hlavní města Evropy"
     @Column(nullable = false)
     private String title;
 
-    // Popisek pod nadpis, např. "Otestuj si znalosti evropských..."
+    // Popisek pod nadpis
     @Column(nullable = false)
     private String description;
 
-    // Prázdný konstruktor (Spring Boot ho nutně potřebuje)
     public QuizCategory() {
     }
 
@@ -32,7 +31,6 @@ public class QuizCategory {
         this.description = description;
     }
 
-    // --- GETTERY A SETTERY ---
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 

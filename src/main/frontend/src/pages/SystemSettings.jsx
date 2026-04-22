@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import AdminMenu from "../components/AdminMenu";
 
 function SystemSettingsPage({ username, isAdmin, logout }) {
-    // Stavy pro nastavení (načítáme z localStorage, nebo použijeme výchozí)
+    // Stavy pro nastavení (načítáme z localStorage, nebo použije výchozí)
     const [questionCount, setQuestionCount] = useState(
         localStorage.getItem("globalQuestionCount") || 10
     );
@@ -21,12 +21,11 @@ function SystemSettingsPage({ username, isAdmin, logout }) {
         alert("✅ Systémová nastavení byla úspěšně uložena!");
     };
 
-    // Pokud sem zabloudí někdo, kdo není "root", nepustíme ho sem
     if (username !== "root") {
         return (
             <div style={{ textAlign: "center", marginTop: "50px", color: "red" }}>
                 <h2>⛔ Přístup odepřen</h2>
-                <p>Tato stránka je určena pouze pro hlavního administrátora (Root).</p>
+                <p>Tato stránka je určena pouze pro hlavního administrátora.</p>
             </div>
         );
     }
