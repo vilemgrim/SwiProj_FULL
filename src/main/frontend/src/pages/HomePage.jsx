@@ -1,28 +1,51 @@
-import React, { useState, useEffect } from "react"; // PŘIDÁNO: useState a useEffect
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import AdminMenu from "../components/AdminMenu";
 
 function HomePage(props) {
     const navigate = useNavigate();
-
-    // 1. ZMĚNA: Prázdná krabička na kvízy, kterou naplníme z databáze
     const [quizzes, setQuizzes] = useState([]);
 
-    // 2. ZMĚNA: Automatické stažení dat hned po načtení stránky
     useEffect(() => {
         fetch("http://localhost:8080/api/quizzes")
             .then(res => res.json())
             .then(data => {
-                // Uložíme data z Javy do našeho React stavu
                 setQuizzes(data);
             })
             .catch(err => console.error("Chyba při načítání kvízů:", err));
-    }, []); // Prázdné pole znamená "spusť to jen jednou při načtení"
+    }, []);
 
     const startQuiz = (quizCode) => {
         navigate(`/quiz?type=${quizCode}`);
     };
 
+    // ==========================================
+    // 🛠️ BLOK REŽIMU ÚDRŽBY
+    // ==========================================
+    const isMaintenance = localStorage.getItem("maintenanceMode") === "true";
+
+    // VŠIMNI SI: Změnili jsme username na props.username a logout na props.logout
+    if (isMaintenance && props.username !== "root") {
+        return (
+            <div style={{ textAlign: "center", marginTop: "100px", fontFamily: "sans-serif" }}>
+                <h1 style={{ fontSize: "50px", margin: "0" }}>🛠️</h1>
+                <h2 style={{ color: "#d9534f" }}>Probíhá údržba systému</h2>
+                <p style={{ color: "#555", fontSize: "18px" }}>
+                    Omlouváme se, kvízy jsou momentálně nedostupné, protože pracujeme na vylepšení aplikace.<br/>
+                    Zkuste to prosím později.
+                </p>
+                <button
+                    onClick={props.logout}
+                    style={{ marginTop: "20px", padding: "10px 20px", cursor: "pointer", backgroundColor: "#333", color: "white", border: "none", borderRadius: "5px" }}
+                >
+                    Odhlásit se
+                </button>
+            </div>
+        );
+    }
+    // ==========================================
+
+    // Zbytek tvé stránky (zobrazí se pouze, pokud není údržba, NEBO pokud je přihlášen root)
     return (
         <div
             style={{
@@ -66,10 +89,9 @@ function HomePage(props) {
                     margin: "0 auto"
                 }}
             >
-                {/* 3. ZMĚNA: React teď projíždí to pole, co přišlo z Javy */}
                 {quizzes.map((quiz) => (
                     <div
-                        key={quiz.id} // Použije se databázové ID jako unikátní klíč
+                        key={quiz.id}
                         style={{
                             padding: "20px",
                             borderRadius: "10px",
@@ -85,7 +107,6 @@ function HomePage(props) {
                         <p style={{ minHeight: "50px", color: "#555" }}>{quiz.description}</p>
 
                         <button
-                            // POZOR: Zde posíláme quiz.code (např. "EU_CAPITALS"), protože v Javě jsme to tak pojmenovali
                             onClick={() => startQuiz(quiz.code)}
                             style={{
                                 marginTop: "15px",

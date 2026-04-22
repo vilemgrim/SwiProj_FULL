@@ -15,9 +15,12 @@ function QuizPage() {
     const params = new URLSearchParams(window.location.search);
     const quizType = params.get("type") || "EU_CAPITALS";
 
-    // Načtení otázek
     useEffect(() => {
-        fetch(`http://localhost:8080/api/questions/quiz?quiz=${quizType}`)
+        // 1. Přečteme nastavení z paměti prohlížeče (pokud tam není, dáme výchozích 10)
+        const count = localStorage.getItem("globalQuestionCount") || 10;
+
+        // 2. Přidáme &count=${count} na konec adresy
+        fetch(`http://localhost:8080/api/questions/quiz?quiz=${quizType}&count=${count}`)
             .then(res => {
                 if (!res.ok) throw new Error("Backend error");
                 return res.json();
