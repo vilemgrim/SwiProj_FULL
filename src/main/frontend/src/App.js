@@ -10,6 +10,8 @@ import QuizPage from "./pages/QuizPage";
 import MyResultsPage from "./pages/MyResultsPage";
 import CreateQuizPage from "./pages/CreateQuizPage";
 import ManageQuestionsPage from "./pages/ManageQuestionsPage";
+import SystemSettings from "./pages/SystemSettings";
+import SystemSettingsPage from "./pages/SystemSettings";
 
 function AppWrapper() {
     return (
@@ -197,8 +199,16 @@ function App() {
                     isAdmin={isAdmin}
                     logout={logout} />}
             />
-
+            <Route
+                path="/admin/system"
+                element={
+                    <SystemSettingsPage
+                        username={username}
+                        isAdmin={isAdmin}
+                        logout={logout} />}
+            />
         </Routes>
+
     );
 }
 
