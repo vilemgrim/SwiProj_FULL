@@ -38,10 +38,12 @@ function AdminMenu({ username, isAdmin, logout }) {
                 )}
             </div>
 
+            {/* Hlavní stránka */}
             <button style={menuBtn} onClick={() => navigate("/home")}>
                 Hlavní stránka
             </button>
 
+            {/* Správa pro adminy */}
             {isAdmin && (
                 <>
                     <button style={menuBtn} onClick={() => navigate("/admin/users")}>
@@ -54,13 +56,19 @@ function AdminMenu({ username, isAdmin, logout }) {
                 </>
             )}
 
+            {/* Systémové nastavení pro root */}
             {username === "root" && (
                 <button style={menuBtn} onClick={() => navigate("/admin/system")}>
                     Systémové nastavení
                 </button>
             )}
 
-            {/* 🔥 NOVÉ TLAČÍTKO – ODHLÁŠENÍ */}
+            {/* NOVÉ TLAČÍTKO – Moje výsledky */}
+            <button style={menuBtn} onClick={() => navigate("/my-results")}>
+                Moje výsledky
+            </button>
+
+            {/* Odhlášení */}
             <button
                 onClick={logout}
                 style={{

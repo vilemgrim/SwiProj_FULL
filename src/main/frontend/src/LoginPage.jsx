@@ -24,8 +24,11 @@ function LoginPage({ goBack, onLogin }) {
             if (result.success === true) {
                 alert("Přihlášení úspěšné!");
 
-                // 🔥 OPRAVA: bezpečné převedení admin flagu
+                // bezpečné převedení admin flagu
                 const adminFlag = result.admin === true || result.admin === "true";
+
+                // ULOŽENÍ USERNAME
+                localStorage.setItem("username", username);
 
                 onLogin(username, adminFlag);
 

@@ -15,6 +15,7 @@ function QuizPage() {
     const params = new URLSearchParams(window.location.search);
     const quizType = params.get("type") || "EU_CAPITALS";
 
+    // Načtení otázek
     useEffect(() => {
         fetch(`http://localhost:8080/api/questions/quiz?quiz=${quizType}`)
             .then(res => {
@@ -31,6 +32,22 @@ function QuizPage() {
                 setLoading(false);
             });
     }, [quizType]);
+
+    // Uložení výsledku po dokončení kvízu
+    useEffect(() => {
+        if (finished) {
+            fetch("http://localhost:8080/api/results/save", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    username: localStorage.getItem("username"),
+                    quiz: quizType,
+                    score: score,
+                    total: questions.length
+                })
+            });
+        }
+    }, [finished]);
 
     if (loading) {
         return <div style={{ textAlign: "center", marginTop: "40px" }}>Načítám otázky...</div>;
@@ -85,6 +102,7 @@ function QuizPage() {
         setFinished(true);
     };
 
+    // Výsledková stránka
     if (finished) {
         return (
             <div style={{ textAlign: "center", marginTop: "40px" }}>
@@ -110,6 +128,7 @@ function QuizPage() {
         );
     }
 
+    // Hlavní UI kvízu
     return (
         <div style={{ maxWidth: "600px", margin: "40px auto", textAlign: "center" }}>
             <h2>Otázka {index + 1} / {questions.length}</h2>
