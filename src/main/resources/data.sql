@@ -1,3 +1,10 @@
+INSERT INTO quiz_categories (code, title, description) VALUES ('EU_CAPITALS', 'Hlavní města Evropy', 'Otestuj si znalosti evropských hlavních měst.') ON CONFLICT (code) DO NOTHING;
+INSERT INTO quiz_categories (code, title, description) VALUES ('ASIA_CAPITALS', 'Hlavní města Asie', 'Poznáš hlavní města asijských států?') ON CONFLICT (code) DO NOTHING;;
+INSERT INTO quiz_categories (code, title, description) VALUES ('AFRICA_CAPITALS', 'Hlavní města Afriky', 'Prověř si znalosti afrických metropolí') ON CONFLICT (code) DO NOTHING;;
+INSERT INTO quiz_categories (code, title, description) VALUES ('NORTH_AMERICA_CAPITALS', 'Hlavní města severní Ameriky', 'Prověř si znalosti severoamerických států') ON CONFLICT (code) DO NOTHING;;
+INSERT INTO quiz_categories (code, title, description) VALUES ('SOUTH_AMERICA_CAPITALS', 'Hlavní města jižní Ameriky', 'Prověř si znalosti jihooamerických států') ON CONFLICT (code) DO NOTHING;;
+INSERT INTO quiz_categories (code, title, description) VALUES ('OCEANIA_CAPITALS', 'Hlavní města Oceánie', 'Vyzkoušej si znalosti ostrovních států Oceánie.') ON CONFLICT (code) DO NOTHING;;
+INSERT INTO quiz_categories (code, title, description) VALUES ('WORLD_CAPITALS', 'Hlavní města celého světa', 'Ultimátní test znalostí všech světových hlavních měst.') ON CONFLICT (code) DO NOTHING;;
 INSERT INTO questions (quiz, question, correct) VALUES ('EU_CAPITALS', 'Jaké je hlavní město Albánie?', 'Tirana');
 INSERT INTO questions (quiz, question, correct) VALUES ('EU_CAPITALS', 'Jaké je hlavní město Andorry?', 'Andorra la Vella');
 INSERT INTO questions (quiz, question, correct) VALUES ('EU_CAPITALS', 'Jaké je hlavní město Arménie?', 'Jerevan');

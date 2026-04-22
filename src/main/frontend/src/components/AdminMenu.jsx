@@ -53,6 +53,11 @@ function AdminMenu({ username, isAdmin, logout }) {
                     <button style={menuBtn} onClick={() => navigate("/admin/questions")}>
                         Správa otázek
                     </button>
+
+                    {/* NOVÉ TLAČÍTKO - Vytvoření kvízu */}
+                    <button style={menuBtn} onClick={() => navigate("/create-quiz")}>
+                        Vytvořit kvíz
+                    </button>
                 </>
             )}
 

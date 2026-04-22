@@ -7,7 +7,9 @@ import ChangePasswordPage from "./ChangePasswordPage";
 import HomePage from "./pages/HomePage";
 import UserAdminPage from "./pages/UserAdminPage";
 import QuizPage from "./pages/QuizPage";
-import MyResultsPage from "./pages/MyResultsPage";   // NOVÝ IMPORT
+import MyResultsPage from "./pages/MyResultsPage";
+import CreateQuizPage from "./pages/CreateQuizPage";
+import ManageQuestionsPage from "./pages/ManageQuestionsPage";
 
 function AppWrapper() {
     return (
@@ -168,7 +170,7 @@ function App() {
                 element={<QuizPage />}
             />
 
-            //OPRAVENÁ STRÁNKA – Moje výsledky
+
             <Route
                 path="/my-results"
                 element={
@@ -178,6 +180,22 @@ function App() {
                         logout={logout}
                     />
                 }
+            />
+            <Route
+                path="/create-quiz"
+                element={
+                <CreateQuizPage
+                    username={username}
+                    isAdmin={isAdmin}
+                    logout={logout} />}
+            />
+            <Route
+                path="/admin/questions"
+                element={
+                <ManageQuestionsPage
+                    username={username}
+                    isAdmin={isAdmin}
+                    logout={logout} />}
             />
 
         </Routes>

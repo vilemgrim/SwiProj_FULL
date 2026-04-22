@@ -1,52 +1,26 @@
-import React from "react";
+import React, { useState, useEffect } from "react"; // PŘIDÁNO: useState a useEffect
 import { useNavigate } from "react-router-dom";
 import AdminMenu from "../components/AdminMenu";
 
 function HomePage(props) {
-
     const navigate = useNavigate();
 
-    // Kompletní seznam všech 7 kvízů
-    const quizzes = [
-        {
-            id: "EU_CAPITALS",
-            title: "Hlavní města Evropy",
-            description: "Otestuj si znalosti evropských hlavních měst."
-        },
-        {
-            id: "ASIA_CAPITALS",
-            title: "Hlavní města Asie",
-            description: "Poznáš hlavní města asijských států?"
-        },
-        {
-            id: "AFRICA_CAPITALS",
-            title: "Hlavní města Afriky",
-            description: "Prověř si znalosti afrických metropolí."
-        },
-        {
-            id: "NORTH_AMERICA_CAPITALS",
-            title: "Hlavní města Severní Ameriky",
-            description: "Prověř si znalosti severoamerických států."
-        },
-        {
-            id: "SOUTH_AMERICA_CAPITALS",
-            title: "Hlavní města Jižní Ameriky",
-            description: "Jak dobře znáš hlavní města Jižní Ameriky?"
-        },
-        {
-            id: "OCEANIA_CAPITALS",
-            title: "Hlavní města Oceánie",
-            description: "Vyzkoušej si znalosti ostrovních států Oceánie."
-        },
-        {
-            id: "WORLD_CAPITALS",
-            title: "Hlavní města celého světa",
-            description: "Ultimátní test znalostí všech světových hlavních měst."
-        }
-    ];
+    // 1. ZMĚNA: Prázdná krabička na kvízy, kterou naplníme z databáze
+    const [quizzes, setQuizzes] = useState([]);
 
-    const startQuiz = (quizId) => {
-        navigate(`/quiz?type=${quizId}`);
+    // 2. ZMĚNA: Automatické stažení dat hned po načtení stránky
+    useEffect(() => {
+        fetch("http://localhost:8080/api/quizzes")
+            .then(res => res.json())
+            .then(data => {
+                // Uložíme data z Javy do našeho React stavu
+                setQuizzes(data);
+            })
+            .catch(err => console.error("Chyba při načítání kvízů:", err));
+    }, []); // Prázdné pole znamená "spusť to jen jednou při načtení"
+
+    const startQuiz = (quizCode) => {
+        navigate(`/quiz?type=${quizCode}`);
     };
 
     return (
@@ -58,7 +32,6 @@ function HomePage(props) {
                 position: "relative"
             }}
         >
-
             {/* ADMIN MENU – včetně logout */}
             <AdminMenu
                 username={props.username}
@@ -93,9 +66,10 @@ function HomePage(props) {
                     margin: "0 auto"
                 }}
             >
+                {/* 3. ZMĚNA: React teď projíždí to pole, co přišlo z Javy */}
                 {quizzes.map((quiz) => (
                     <div
-                        key={quiz.id}
+                        key={quiz.id} // Použije se databázové ID jako unikátní klíč
                         style={{
                             padding: "20px",
                             borderRadius: "10px",
@@ -111,7 +85,8 @@ function HomePage(props) {
                         <p style={{ minHeight: "50px", color: "#555" }}>{quiz.description}</p>
 
                         <button
-                            onClick={() => startQuiz(quiz.id)}
+                            // POZOR: Zde posíláme quiz.code (např. "EU_CAPITALS"), protože v Javě jsme to tak pojmenovali
+                            onClick={() => startQuiz(quiz.code)}
                             style={{
                                 marginTop: "15px",
                                 padding: "10px 20px",
