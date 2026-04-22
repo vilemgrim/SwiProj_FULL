@@ -9,13 +9,13 @@ function ManageQuestionsPage({ username, isAdmin, logout }) {
     const [correctAnswer, setCorrectAnswer] = useState("");
     const [wrongAnswersInput, setWrongAnswersInput] = useState("");
 
-    // 1. Při načtení stránky stáhneme všechny existující kvízy do rozbalovacího menu
+    // Při načtení stránky se stáhnou všechny kvízy do rozbalovacího menu
     useEffect(() => {
         fetch("http://localhost:8080/api/quizzes")
             .then(res => res.json())
             .then(data => {
                 setCategories(data);
-                // Nastavíme první kvíz v seznamu jako výchozí, aby políčko nebylo prázdné
+                // Výchozí kvíz, aby pole nebylo prázdné
                 if (data.length > 0) {
                     setSelectedQuiz(data[0].code);
                 }
@@ -23,7 +23,7 @@ function ManageQuestionsPage({ username, isAdmin, logout }) {
             .catch(err => console.error("Chyba při stahování kategorií:", err));
     }, []);
 
-    // 2. Funkce pro odeslání otázky do Javy
+    // Funkce pro odeslání otázky do Javy
     const handleAddQuestion = async (e) => {
         e.preventDefault();
 
@@ -40,7 +40,7 @@ function ManageQuestionsPage({ username, isAdmin, logout }) {
                 .map(answer => answer.trim())
                 .filter(answer => answer !== "");
 
-            // Validace: Pokud už něco zadal, musí toho být aspoň 3, aby měl systém z čeho vybírat
+            // Validace: Pokud něco zadal, musí toho být aspoň 3, aby měl systém z čeho vybírat
             if (wrongAnswersArray.length > 0 && wrongAnswersArray.length < 3) {
                 alert("⚠️ Zadejte prosím alespoň 3 špatné odpovědi oddělené čárkou, nebo pole nechte prázdné.");
                 return;

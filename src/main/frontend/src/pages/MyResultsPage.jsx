@@ -106,7 +106,7 @@ function MyResultsPage({ username, isAdmin, logout }) {
                 />
             </div>
 
-            {/* ⭐ OBSAH VLEVO — ŽÁDNÉ PŘEKRÝVÁNÍ */}
+            {/*  OBSAH VLEVO */}
             <div style={{
                 flexGrow: 1,
                 marginLeft: "40px",

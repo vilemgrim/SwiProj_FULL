@@ -19,12 +19,10 @@ function HomePage(props) {
         navigate(`/quiz?type=${quizCode}`);
     };
 
-    // ==========================================
-    // 🛠️ BLOK REŽIMU ÚDRŽBY
-    // ==========================================
+
+    // BLOK REŽIMU ÚDRŽBY
     const isMaintenance = localStorage.getItem("maintenanceMode") === "true";
 
-    // VŠIMNI SI: Změnili jsme username na props.username a logout na props.logout
     if (isMaintenance && props.username !== "root") {
         return (
             <div style={{ textAlign: "center", marginTop: "100px", fontFamily: "sans-serif" }}>
@@ -43,9 +41,7 @@ function HomePage(props) {
             </div>
         );
     }
-    // ==========================================
 
-    // Zbytek tvé stránky (zobrazí se pouze, pokud není údržba, NEBO pokud je přihlášen root)
     return (
         <div
             style={{
@@ -55,7 +51,7 @@ function HomePage(props) {
                 position: "relative"
             }}
         >
-            {/* ADMIN MENU – včetně logout */}
+            {/* ADMIN MENU */}
             <AdminMenu
                 username={props.username}
                 isAdmin={props.isAdmin}

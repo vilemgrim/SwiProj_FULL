@@ -16,10 +16,8 @@ function QuizPage() {
     const quizType = params.get("type") || "EU_CAPITALS";
 
     useEffect(() => {
-        // 1. Přečteme nastavení z paměti prohlížeče (pokud tam není, dáme výchozích 10)
+        // Přečteme nastavení z paměti prohlížeče (pokud root nic neměnil, dáme výchozích 10)
         const count = localStorage.getItem("globalQuestionCount") || 10;
-
-        // 2. Přidáme &count=${count} na konec adresy
         fetch(`http://localhost:8080/api/questions/quiz?quiz=${quizType}&count=${count}`)
             .then(res => {
                 if (!res.ok) throw new Error("Backend error");

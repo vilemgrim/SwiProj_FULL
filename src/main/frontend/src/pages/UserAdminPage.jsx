@@ -65,7 +65,7 @@ function UserAdminPage({ username }) {
             }}
         >
 
-            {/* 🔥 JEDNOTNÉ ADMIN MENU */}
+            {/* JEDNOTNÉ ADMIN MENU */}
             <AdminMenu username={username} isAdmin={true} />
 
             {/* HLAVNÍ OBSAH */}

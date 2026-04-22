@@ -54,7 +54,7 @@ function AdminMenu({ username, isAdmin, logout }) {
                         Správa otázek
                     </button>
 
-                    {/* NOVÉ TLAČÍTKO - Vytvoření kvízu */}
+                    {/* Vytvoření kvízu */}
                     <button style={menuBtn} onClick={() => navigate("/create-quiz")}>
                         Vytvořit kvíz
                     </button>
@@ -68,7 +68,7 @@ function AdminMenu({ username, isAdmin, logout }) {
                 </button>
             )}
 
-            {/* NOVÉ TLAČÍTKO – Moje výsledky */}
+            {/* Moje výsledky */}
             <button style={menuBtn} onClick={() => navigate("/my-results")}>
                 Moje výsledky
             </button>
