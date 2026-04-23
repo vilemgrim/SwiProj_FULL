@@ -41,4 +41,39 @@ public class QuestionController {
             return ResponseEntity.badRequest().body("{\"error\": \"Chyba při ukládání na server.\"}");
         }
     }
+    // 1. Získání VŠECH otázek (pro zobrazení v tabulce adminovi)
+    @GetMapping
+    public List<Question> getAllQuestions() {
+        return questionRepository.findAll();
+    }
+
+    // 2. Úprava existující otázky
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateQuestion(@PathVariable Long id, @RequestBody Question updatedQuestion) {
+        if (!questionRepository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+
+        updatedQuestion.setId(id); // Pojistka, aby se přepsala ta správná otázka
+
+        try {
+            questionRepository.save(updatedQuestion);
+            return ResponseEntity.ok().body("{\"message\": \"Otázka úspěšně upravena\"}");
+        } catch (Exception e) {
+            System.err.println("Chyba při úpravě otázky: " + e.getMessage());
+            return ResponseEntity.badRequest().body("{\"error\": \"Chyba při úpravě na serveru.\"}");
+        }
+    }
+
+    // 3. Smazání otázky
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteQuestion(@PathVariable Long id) {
+        try {
+            questionRepository.deleteById(id);
+            return ResponseEntity.ok().body("{\"message\": \"Otázka úspěšně smazána\"}");
+        } catch (Exception e) {
+            System.err.println("Chyba při mazání otázky: " + e.getMessage());
+            return ResponseEntity.badRequest().body("{\"error\": \"Nelze smazat otázku.\"}");
+        }
+    }
 }

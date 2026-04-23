@@ -1,151 +1,237 @@
 import React, { useState, useEffect } from "react";
 import AdminMenu from "../components/AdminMenu";
+import "./ManageQuestionsPage.css";
 
-function ManageQuestionsPage({ username, isAdmin, logout }) {
-    // Stavy pro formulář
-    const [categories, setCategories] = useState([]);
-    const [selectedQuiz, setSelectedQuiz] = useState("");
+function ManageQuestionsPage(props) {
+    const [activeTab, setActiveTab] = useState("add");
+    const [quizzes, setQuizzes] = useState([]);
+    const [questions, setQuestions] = useState([]);
+
+    const [quizCode, setQuizCode] = useState("");
     const [questionText, setQuestionText] = useState("");
     const [correctAnswer, setCorrectAnswer] = useState("");
-    const [wrongAnswersInput, setWrongAnswersInput] = useState("");
+    const [wrongAnswers, setWrongAnswers] = useState(["", "", ""]);
 
-    // Při načtení stránky se stáhnou všechny kvízy do rozbalovacího menu
+    const [editingQuestionId, setEditingQuestionId] = useState(null);
+
     useEffect(() => {
-        fetch("http://localhost:8080/api/quizzes")
-            .then(res => res.json())
-            .then(data => {
-                setCategories(data);
-                // Výchozí kvíz, aby pole nebylo prázdné
-                if (data.length > 0) {
-                    setSelectedQuiz(data[0].code);
-                }
-            })
-            .catch(err => console.error("Chyba při stahování kategorií:", err));
+        fetchQuizzes();
+        fetchQuestions();
     }, []);
 
-    // Funkce pro odeslání otázky do Javy
+    const fetchQuizzes = async () => {
+        try {
+            const res = await fetch("http://localhost:8080/api/quizzes");
+            const data = await res.json();
+            setQuizzes(data);
+            if (data.length > 0) setQuizCode(data[0].code);
+        } catch (err) { console.error("Chyba načítání kvízů:", err); }
+    };
+
+    const fetchQuestions = async () => {
+        try {
+            const res = await fetch("http://localhost:8080/api/questions");
+            const data = await res.json();
+            setQuestions(data);
+        } catch (err) { console.error("Chyba načítání otázek:", err); }
+    };
+
+    const buildQuestionPayload = () => {
+        const wrongAnswersList = wrongAnswers.filter(a => a.trim() !== "");
+        return {
+            quiz: quizCode,
+            question: questionText,
+            correct: correctAnswer,
+            wrongAnswers: wrongAnswersList
+        };
+    };
+
     const handleAddQuestion = async (e) => {
         e.preventDefault();
 
-        if (!questionText || !correctAnswer) {
-            alert("⚠️ Vyplňte prosím znění otázky i správnou odpověď.");
+        if (buildQuestionPayload().wrongAnswers.length > 0 && buildQuestionPayload().wrongAnswers.length < 3) {
+            alert("⚠️ Pro manuální režim musíte vyplnit VŠECHNY 3 špatné odpovědi. Pro automatický režim je nechte prázdná.");
             return;
         }
 
-        // Zpracování špatných odpovědí (POKUD JSOU ZADANÉ)
-        let wrongAnswersArray = [];
-        if (wrongAnswersInput.trim() !== "") {
-            wrongAnswersArray = wrongAnswersInput
-                .split(",")
-                .map(answer => answer.trim())
-                .filter(answer => answer !== "");
-
-            // Validace: Pokud něco zadal, musí toho být aspoň 3, aby měl systém z čeho vybírat
-            if (wrongAnswersArray.length > 0 && wrongAnswersArray.length < 3) {
-                alert("⚠️ Zadejte prosím alespoň 3 špatné odpovědi oddělené čárkou, nebo pole nechte prázdné.");
-                return;
-            }
-        }
-
         try {
-            const response = await fetch("http://localhost:8080/api/questions/add", {
+            const res = await fetch("http://localhost:8080/api/questions/add", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    quiz: selectedQuiz,
-                    question: questionText,
-                    correct: correctAnswer,
-                    wrongAnswers: wrongAnswersArray // <-- Přidáno do odesílání
-                }),
+                body: JSON.stringify(buildQuestionPayload())
             });
-
-            if (response.ok) {
-                alert("✅ Otázka byla úspěšně přidána!");
-                setQuestionText("");
-                setCorrectAnswer("");
-                setWrongAnswersInput(""); // Vyčištění nového políčka
-            } else {
-                alert("❌ Chyba při ukládání na server.");
+            if (res.ok) {
+                alert("Otázka přidána!");
+                resetForm();
+                fetchQuestions();
             }
-        } catch (error) {
-            console.error("Chyba sítě:", error);
+        } catch (err) { alert("Chyba při ukládání."); }
+    };
+
+    const handleDelete = async (id) => {
+        if (!window.confirm("Opravdu chcete tuto otázku smazat?")) return;
+
+        try {
+            const res = await fetch(`http://localhost:8080/api/questions/${id}`, { method: "DELETE" });
+            if (res.ok) {
+                setQuestions(questions.filter(q => q.id !== id));
+            } else {
+                alert("Chyba při mazání.");
+            }
+        } catch (err) { alert("Chyba při komunikaci se serverem."); }
+    };
+
+    const startEditing = (q) => {
+        setEditingQuestionId(q.id);
+        setQuizCode(q.quiz || "");
+        setQuestionText(q.question || "");
+        setCorrectAnswer(q.correct || "");
+
+        if (q.wrongAnswers && q.wrongAnswers.length > 0) {
+            setWrongAnswers(q.wrongAnswers);
+        } else {
+            setWrongAnswers(["", "", ""]);
         }
     };
 
-    return (
-        <div style={{ minHeight: "100vh", backgroundColor: "#f5f7fb", padding: "20px", display: "flex", flexDirection: "row" }}>
+    const handleUpdateQuestion = async (e) => {
+        e.preventDefault();
 
-            {/* PANEL VPRAVO */}
-            <div style={{ flexShrink: 0 }}>
-                <AdminMenu username={username} isAdmin={isAdmin} logout={logout} />
-            </div>
+        if (buildQuestionPayload().wrongAnswers.length > 0 && buildQuestionPayload().wrongAnswers.length < 3) {
+            alert("⚠️ Pro manuální režim musíte vyplnit VŠECHNY 3 špatné odpovědi. Pro automatický režim je nechte prázdná.");
+            return;
+        }
 
-            {/* OBSAH VLEVO */}
-            <div style={{ flexGrow: 1, marginLeft: "40px", maxWidth: "600px" }}>
-                <h2 style={{ marginBottom: "20px", fontWeight: "600", color: "#333" }}>
-                    Správa otázek
-                </h2>
+        try {
+            const res = await fetch(`http://localhost:8080/api/questions/${editingQuestionId}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(buildQuestionPayload())
+            });
+            if (res.ok) {
+                alert("Otázka upravena!");
+                setEditingQuestionId(null);
+                resetForm();
+                fetchQuestions();
+            }
+        } catch (err) { alert("Chyba při úpravě."); }
+    };
 
-                <div style={{ backgroundColor: "white", padding: "30px", borderRadius: "8px", boxShadow: "0 2px 8px rgba(0,0,0,0.1)" }}>
-                    <form onSubmit={handleAddQuestion} style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
+    const resetForm = () => {
+        setQuestionText("");
+        setCorrectAnswer("");
+        setWrongAnswers(["", "", ""]);
+    };
 
-                        {/* DYNAMICKÉ ROZBALOVACÍ MENU */}
-                        <div>
-                            <label><strong>Vyberte kvíz:</strong></label><br/>
-                            <select
-                                value={selectedQuiz}
-                                onChange={(e) => setSelectedQuiz(e.target.value)}
-                                style={{ width: "100%", padding: "10px", marginTop: "5px", borderRadius: "5px", border: "1px solid #ccc" }}
-                            >
-                                {categories.map(cat => (
-                                    <option key={cat.id} value={cat.code}>
-                                        {cat.title}
-                                    </option>
-                                ))}
-                            </select>
-                        </div>
+    const handleWrongAnswerChange = (index, value) => {
+        const newAnswers = [...wrongAnswers];
+        newAnswers[index] = value;
+        setWrongAnswers(newAnswers);
+    };
 
-                        <div>
-                            <label><strong>Znění otázky:</strong></label><br/>
-                            <input
-                                type="text"
-                                placeholder="Např.: Kde sídlí rektorát Ostravské univerzity?"
-                                value={questionText}
-                                onChange={(e) => setQuestionText(e.target.value)}
-                                style={{ width: "100%", padding: "10px", marginTop: "5px", borderRadius: "5px", border: "1px solid #ccc" }}
-                            />
-                        </div>
+    const addWrongAnswerField = () => {
+        setWrongAnswers([...wrongAnswers, ""]);
+    };
 
-                        <div>
-                            <label><strong>Správná odpověď:</strong></label><br/>
-                            <input
-                                type="text"
-                                placeholder="Např.: Na Dvořákově ulici"
-                                value={correctAnswer}
-                                onChange={(e) => setCorrectAnswer(e.target.value)}
-                                style={{ width: "100%", padding: "10px", marginTop: "5px", borderRadius: "5px", border: "1px solid #ccc" }}
-                            />
-                        </div>
-                        <div>
-                            <label><strong>Špatné odpovědi (volitelné, oddělené čárkou):</strong></label><br/>
-                            <textarea
-                                placeholder="Např.: Fakulta umění, Menza, Koleje"
-                                value={wrongAnswersInput}
-                                onChange={(e) => setWrongAnswersInput(e.target.value)}
-                                rows="3"
-                                style={{ width: "100%", padding: "10px", marginTop: "5px", borderRadius: "5px", border: "1px solid #ccc", resize: "vertical" }}
-                            />
-                            <small style={{ color: "#777", display: "block", marginTop: "4px" }}>
-                                Zadejte libovolný počet (min. 3). Pokud necháte prázdné, systém vybere náhodné špatné odpovědi automaticky z jiných otázek.
-                            </small>
-                        </div>
+    const removeWrongAnswerField = (index) => {
+        const newAnswers = wrongAnswers.filter((_, i) => i !== index);
+        setWrongAnswers(newAnswers);
+    };
 
-                        <button type="submit" style={{ padding: "12px", backgroundColor: "#007bff", color: "white", border: "none", borderRadius: "6px", cursor: "pointer", fontWeight: "bold", marginTop: "10px", fontSize: "16px" }}>
-                            ➕ Přidat otázku do databáze
+    const renderFormFields = () => (
+        <>
+            <select className="manage-select" value={quizCode} onChange={(e) => setQuizCode(e.target.value)}>
+                {quizzes.map(q => <option key={q.code} value={q.code}>{q.title}</option>)}
+            </select>
+            <input className="manage-input" placeholder="Znění otázky" value={questionText} onChange={(e) => setQuestionText(e.target.value)} required />
+            <input className="manage-input" placeholder="Správná odpověď" value={correctAnswer} onChange={(e) => setCorrectAnswer(e.target.value)} required />
+
+            <small className="manage-helper-text">
+                Špatné odpovědi (Nechte prázdné pro automatiku, nebo vyplňte alespoň 3):
+            </small>
+
+            {wrongAnswers.map((answer, index) => (
+                <div key={index} className="manage-answer-row">
+                    <input
+                        className="manage-input manage-answer-input"
+                        placeholder={`Špatná odpověď ${index + 1}`}
+                        value={answer}
+                        onChange={(e) => handleWrongAnswerChange(index, e.target.value)}
+                    />
+                    {wrongAnswers.length > 3 && (
+                        <button
+                            type="button"
+                            className="manage-remove-btn"
+                            onClick={() => removeWrongAnswerField(index)}
+                        >
+                            ✖
                         </button>
-                    </form>
+                    )}
                 </div>
+            ))}
+
+            <button type="button" className="manage-add-btn" onClick={addWrongAnswerField}>
+                ➕ Přidat další špatnou odpověď
+            </button>
+        </>
+    );
+
+    return (
+        <div className="manage-container">
+            <AdminMenu username={props.username} isAdmin={props.isAdmin} logout={props.logout} />
+
+            <div className="manage-content">
+                <h2 className="manage-title">Správa otázek</h2>
+
+                <div className="manage-tabs">
+                    <button className={`manage-tab-btn ${activeTab === "add" ? "active" : ""}`} onClick={() => setActiveTab("add")}>
+                        📝 Přidat novou
+                    </button>
+                    <button className={`manage-tab-btn ${activeTab === "list" ? "active" : ""}`} onClick={() => setActiveTab("list")}>
+                        ⚙️ Upravit / Smazat
+                    </button>
+                </div>
+
+                {activeTab === "add" && (
+                    <form onSubmit={handleAddQuestion} className="manage-form">
+                        {renderFormFields()}
+                        <button type="submit" className="manage-submit-btn">➕ Vytvořit otázku</button>
+                    </form>
+                )}
+
+                {activeTab === "list" && (
+                    <div>
+                        {questions.length === 0 ? <p style={{textAlign:"center"}}>Žádné otázky v databázi.</p> : null}
+                        {questions.map(q => (
+                            <div key={q.id} className="question-item">
+                                <div>
+                                    <span className="question-text">{q.question}</span>
+                                    <span className="question-category">{q.quiz}</span>
+                                </div>
+                                <div className="action-btns">
+                                    <button className="edit-btn" onClick={() => startEditing(q)}>Upravit</button>
+                                    <button className="delete-btn" onClick={() => handleDelete(q.id)}>Smazat</button>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                )}
             </div>
+
+            {editingQuestionId && (
+                <div className="modal-overlay">
+                    <div className="modal-content">
+                        <h3 className="manage-title">Upravit otázku</h3>
+                        <form onSubmit={handleUpdateQuestion} className="manage-form">
+                            {renderFormFields()}
+                            <div className="modal-actions">
+                                <button type="submit" className="manage-submit-btn btn-save">💾 Uložit</button>
+                                <button type="button" className="manage-submit-btn btn-cancel" onClick={() => { setEditingQuestionId(null); resetForm(); }}>Zrušit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
