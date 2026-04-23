@@ -1,0 +1,55 @@
+.notfound-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #e8f0fe; /* Tvé oblíbené světle modré pozadí */
+    text-align: center;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.notfound-code {
+    font-size: 120px;
+    font-weight: bold;
+    color: #1e3c72; /* Tmavě modrá OU barva */
+    margin: 0;
+    line-height: 1;
+    text-shadow: 0 5px 15px rgba(30, 60, 114, 0.2);
+}
+
+.notfound-title {
+    font-size: 32px;
+    color: #333;
+    margin: 20px 0 10px 0;
+}
+
+.notfound-text {
+    font-size: 18px;
+    color: #666;
+    max-width: 500px;
+    line-height: 1.5;
+    margin-bottom: 40px;
+}
+
+.notfound-btn {
+    padding: 15px 30px;
+    background-color: #0275d8;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    box-shadow: 0 4px 10px rgba(2, 117, 216, 0.3);
+}
+
+.notfound-btn:hover {
+    background-color: #025aa5;
+}
+
+.notfound-btn:active {
+    transform: scale(0.98);
+}

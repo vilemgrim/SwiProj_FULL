@@ -11,7 +11,9 @@ import MyResultsPage from "./pages/MyResultsPage";
 import CreateQuizPage from "./pages/CreateQuizPage";
 import ManageQuestionsPage from "./pages/ManageQuestionsPage";
 import SystemSettingsPage from "./pages/SystemSettings";
-import "./pages/LandingPage.css";
+import NotFoundPage from "./pages/NotFoundPage";
+import "./styles/LandingPage.css";
+
 
 function AppWrapper() {
     return (
@@ -89,6 +91,7 @@ function App() {
             <Route path="/create-quiz" element={<CreateQuizPage username={username} isAdmin={isAdmin} logout={logout} />} />
             <Route path="/admin/questions" element={<ManageQuestionsPage username={username} isAdmin={isAdmin} logout={logout} />} />
             <Route path="/admin/system" element={<SystemSettingsPage username={username} isAdmin={isAdmin} logout={logout} />} />
+            <Route path="*" element={<NotFoundPage />} />
         </Routes>
     );
 }

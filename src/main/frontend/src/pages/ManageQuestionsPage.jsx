@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import AdminMenu from "../components/AdminMenu";
-import "./ManageQuestionsPage.css";
+import "../styles/ManageQuestionsPage.css";
 
 function ManageQuestionsPage(props) {
     const [activeTab, setActiveTab] = useState("add");
