@@ -1,0 +1,117 @@
+/* HomePage.css */
+
+.home-container {
+    min-height: 100vh;
+    background-color: #e8f0fe;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.home-header {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.home-title {
+    font-size: 32px;
+    color: #1e3c72;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.home-subtitle {
+    font-size: 18px;
+    max-width: 600px;
+    margin: 0 auto 30px auto;
+    color: #555;
+}
+
+/* --- FILTROVACÍ ZÁLOŽKY --- */
+.category-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.tab-button {
+    padding: 10px 20px;
+    border-radius: 30px; /* Zakulacený "pill" design */
+    border: 2px solid transparent;
+    background-color: white;
+    color: #555;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    transition: all 0.2s ease;
+}
+
+.tab-button:hover {
+    background-color: #f8f9fa;
+    transform: translateY(-2px);
+}
+
+/* Aktivní záložka */
+.tab-button.active {
+    background-color: #0275d8;
+    color: white;
+    box-shadow: 0 4px 10px rgba(2, 117, 216, 0.3);
+}
+
+/* --- GRID S KVÍZY --- */
+.quizzes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.quiz-card {
+    padding: 25px;
+    border-radius: 15px;
+    background: white;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.quiz-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.quiz-title {
+    color: #333;
+    margin-bottom: 10px;
+    font-size: 22px;
+}
+
+.quiz-desc {
+    color: #666;
+    margin-bottom: 20px;
+    line-height: 1.5;
+    flex-grow: 1; /* Roztáhne popis, aby tlačítka byla vždy dole zarovnaná */
+}
+
+.quiz-start-btn {
+    padding: 12px 20px;
+    background: #0275d8;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background 0.2s;
+    width: 100%;
+}
+
+.quiz-start-btn:hover {
+    background: #025aa5;
+}

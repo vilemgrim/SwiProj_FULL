@@ -1,0 +1,81 @@
+/* LandingPage.css */
+
+.landing-container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.landing-card {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    padding: 50px 40px;
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+}
+
+.landing-icon {
+    font-size: 60px;
+    margin-bottom: 10px;
+}
+
+.landing-title {
+    color: #1e3c72;
+    margin-bottom: 15px;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.landing-subtitle {
+    color: #555;
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 40px;
+}
+
+.landing-options {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.landing-option-card {
+    width: 120px;
+    height: 120px;
+    background-color: #f8f9fa;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    flex-direction: column;
+    transition: transform 0.2s ease-in-out;
+}
+
+.landing-option-card:hover {
+    transform: scale(1.05);
+}
+
+.landing-option-card span {
+    font-size: 40px;
+}
+
+.landing-option-card p {
+    margin: 10px 0 0 0;
+    color: #333;
+    font-weight: 500;
+}
+
+.landing-footer {
+    margin-top: 40px;
+    font-size: 12px;
+    color: #999;
+}

@@ -1,0 +1,92 @@
+/* LoginPage.css */
+
+.login-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 20px;
+}
+
+.login-card {
+    background-color: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+}
+
+.login-title {
+    color: #333;
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.login-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.login-input {
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    transition: border-color 0.2s;
+}
+
+.login-input:focus {
+    outline: none;
+    border-color: #0275d8;
+    box-shadow: 0 0 5px rgba(2, 117, 216, 0.2);
+}
+
+.login-button {
+    padding: 12px;
+    border-radius: 8px;
+    background-color: #0275d8;
+    color: white;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    margin-top: 10px;
+}
+
+.login-button:hover {
+    background-color: #025aa5;
+}
+
+.login-button:active {
+    transform: scale(0.98);
+}
+
+.login-back-button {
+    margin-bottom: 20px;
+    align-self: flex-start;
+    width: 100%;
+    text-align: left;
+}
+
+.login-back-button button {
+    background: none;
+    border: none;
+    color: #6c757d;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 0;
+    transition: color 0.2s ease-in-out;
+}
+
+.login-back-button button:hover {
+    color: #0275d8;
+    text-decoration: underline;
+}

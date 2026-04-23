@@ -84,6 +84,10 @@ function CreateQuizPage({ username, isAdmin, logout }) {
                                 style={{ width: "100%", padding: "10px", marginTop: "5px", borderRadius: "5px", border: "1px solid #ccc" }}
                             />
                         </div>
+                        <small style={{ color: "#777", display: "block", marginTop: "5px" }}>
+                            💡 Tip: Aby se kvíz správně zařadil na hlavní stránce, použijte v názvu nebo popisku slovo
+                            <b> "zeměpis"</b> (pro geografii) nebo <b>"univerzita"</b> (pro info o OU).
+                        </small>
 
                         <div>
                             <label><strong>Popisek:</strong></label><br/>
