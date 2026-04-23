@@ -48,9 +48,21 @@ function ManageQuestionsPage(props) {
 
     const handleAddQuestion = async (e) => {
         e.preventDefault();
+        const payload = buildQuestionPayload();
 
         if (buildQuestionPayload().wrongAnswers.length > 0 && buildQuestionPayload().wrongAnswers.length < 3) {
             alert("⚠️ Pro manuální režim musíte vyplnit VŠECHNY 3 špatné odpovědi. Pro automatický režim je nechte prázdná.");
+            return;
+        }
+        const normalizedWrongAnswers = payload.wrongAnswers.map(ans => ans.trim().toLowerCase());
+        const uniqueWrongAnswers = new Set(normalizedWrongAnswers);
+
+        if (uniqueWrongAnswers.size !== normalizedWrongAnswers.length) {
+            alert("⚠️ Špatné odpovědi se nesmí opakovat! Zadejte unikátní možnosti.");
+            return;
+        }
+        if (normalizedWrongAnswers.includes(payload.correct.trim().toLowerCase())) {
+            alert("⚠️ Jedna ze špatných odpovědí je shodná se správnou odpovědí!");
             return;
         }
 
@@ -96,9 +108,21 @@ function ManageQuestionsPage(props) {
 
     const handleUpdateQuestion = async (e) => {
         e.preventDefault();
-
+        const payload = buildQuestionPayload();
         if (buildQuestionPayload().wrongAnswers.length > 0 && buildQuestionPayload().wrongAnswers.length < 3) {
             alert("⚠️ Pro manuální režim musíte vyplnit VŠECHNY 3 špatné odpovědi. Pro automatický režim je nechte prázdná.");
+            return;
+        }
+        // Převedeme vše na malá písmena a odstraníme mezery na okrajích, aby "Praha" a " praha " byl ten samý duplikát
+        const normalizedWrongAnswers = payload.wrongAnswers.map(ans => ans.trim().toLowerCase());
+        const uniqueWrongAnswers = new Set(normalizedWrongAnswers);
+
+        if (uniqueWrongAnswers.size !== normalizedWrongAnswers.length) {
+            alert("⚠️ Špatné odpovědi se nesmí opakovat! Zadejte unikátní možnosti.");
+            return;
+        }
+        if (normalizedWrongAnswers.includes(payload.correct.trim().toLowerCase())) {
+            alert("⚠️ Jedna ze špatných odpovědí je shodná se správnou odpovědí!");
             return;
         }
 
