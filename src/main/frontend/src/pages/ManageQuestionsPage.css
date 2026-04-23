@@ -1,0 +1,209 @@
+/* ManageQuestionsPage.css */
+
+.manage-container {
+    min-height: 100vh;
+    background-color: #e8f0fe;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.manage-content {
+    max-width: 900px;
+    margin: 40px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+}
+
+.manage-title {
+    text-align: center;
+    color: #1e3c72;
+    margin-bottom: 20px;
+}
+
+/* Záložky */
+.manage-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 15px;
+}
+
+.manage-tab-btn {
+    padding: 10px 25px;
+    border: none;
+    background: none;
+    font-size: 16px;
+    font-weight: bold;
+    color: #777;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.2s;
+}
+
+.manage-tab-btn:hover {
+    background: #f8f9fa;
+    color: #333;
+}
+
+.manage-tab-btn.active {
+    background: #0275d8;
+    color: white;
+}
+
+/* Formuláře */
+.manage-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.manage-input, .manage-select {
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.manage-submit-btn {
+    padding: 12px;
+    background: #28a745;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Seznam otázek */
+.question-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    transition: background 0.2s;
+}
+
+.question-item:hover {
+    background: #f8f9fa;
+}
+
+.question-text {
+    font-weight: bold;
+    color: #333;
+}
+
+.question-category {
+    font-size: 12px;
+    background: #e0eafc;
+    color: #1e3c72;
+    padding: 3px 8px;
+    border-radius: 10px;
+    margin-left: 10px;
+}
+
+.action-btns {
+    display: flex;
+    gap: 10px;
+}
+
+.edit-btn, .delete-btn {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    color: white;
+}
+
+.edit-btn { background: #ffc107; color: #333; }
+.delete-btn { background: #dc3545; }
+
+/* Modální okno pro úpravu */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+.manage-answer-row {
+    display: flex;
+    gap: 10px;
+}
+
+.manage-answer-input {
+    flex: 1;
+}
+
+.manage-remove-btn {
+    padding: 0 15px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.manage-remove-btn:hover {
+    background-color: #c82333;
+}
+
+.manage-add-btn {
+    padding: 10px;
+    background-color: #e0eafc;
+    color: #1e3c72;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.manage-add-btn:hover {
+    background-color: #cddcf9;
+}
+
+/* --- TLAČÍTKA V MODÁLNÍM OKNĚ --- */
+.modal-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.btn-save {
+    flex: 1;
+    background-color: #007bff;
+}
+
+.btn-save:hover {
+    background-color: #0056b3;
+}
+
+.btn-cancel {
+    flex: 1;
+    background-color: #6c757d;
+}
+
+.btn-cancel:hover {
+    background-color: #5a6268;
+}
