@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./RegisterPage.css";
 
 function RegisterPage({ goBack }) {
     const [username, setUsername] = useState("");
@@ -45,36 +46,40 @@ function RegisterPage({ goBack }) {
     };
 
     return (
-        <div style={{ padding: "40px", display: "flex", flexDirection: "column", alignItems: "center" }}>
-            <div style={{ width: "100%", maxWidth: "300px" }}>
-                <button onClick={goBack} style={{ marginBottom: "20px", cursor: "pointer" }}>⬅ Zpět</button>
-                <h2>Registrace</h2>
+        <div className="register-container">
+            <div className="register-card">
 
-                <form onSubmit={handleRegister} style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+                <div className="register-back-button">
+                    <button onClick={goBack}>⬅ Zpět</button>
+                </div>
+
+                <h2 className="register-title">Registrace</h2>
+
+                <form onSubmit={handleRegister} className="register-form-group">
                     <input
+                        className="register-input"
                         placeholder="Uživatel"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
-                        style={{ padding: "8px" }}
                     />
 
                     <input
+                        className="register-input"
                         type="password"
                         placeholder="Heslo"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        style={{ padding: "8px" }}
                     />
 
                     <input
+                        className="register-input"
                         type="password"
                         placeholder="Potvrďte heslo znovu"
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
-                        style={{ padding: "8px" }}
                     />
 
-                    <button type="submit" style={{ padding: "10px", marginTop: "10px", cursor: "pointer", backgroundColor: "#4CAF50", color: "white", border: "none", borderRadius: "5px" }}>
+                    <button type="submit" className="register-button">
                         Registrovat
                     </button>
                 </form>
@@ -82,5 +87,4 @@ function RegisterPage({ goBack }) {
         </div>
     );
 }
-
 export default RegisterPage;
