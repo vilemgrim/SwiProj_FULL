@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import AdminMenu from "../components/AdminMenu";
+import "./HomePage.css";
 
 function HomePage(props) {
     const navigate = useNavigate();
     const [quizzes, setQuizzes] = useState([]);
+    const [activeCategory, setActiveCategory] = useState("Vše");
 
     useEffect(() => {
         fetch("http://localhost:8080/api/quizzes")
@@ -41,84 +43,72 @@ function HomePage(props) {
             </div>
         );
     }
+    const getQuizCategory = (quiz) => {
+        const title = quiz.title.toLowerCase();
 
+        if (title.includes("města") || title.includes("zeměpis")) {
+            return "Zeměpis";
+        }
+        if (title.includes("ou") || title.includes("ostravsk") || title.includes("univerzit")) {
+            return "Univerzita";
+        }
+        return "Ostatní";
+    };
+    const categories = ["Vše", "Zeměpis", "Univerzita", "Ostatní"];
+    const filteredQuizzes = quizzes.filter(quiz => {
+        if (activeCategory === "Vše") return true;
+        return getQuizCategory(quiz) === activeCategory;
+    });
     return (
-        <div
-            style={{
-                minHeight: "100vh",
-                backgroundColor: "#e8f0fe",
-                padding: "20px",
-                position: "relative"
-            }}
-        >
-            {/* ADMIN MENU */}
+        <div className="home-container">
             <AdminMenu
                 username={props.username}
                 isAdmin={props.isAdmin}
                 logout={props.logout}
             />
 
-            {/* Uvítání */}
-            <div style={{ textAlign: "center", marginTop: "40px" }}>
-                <h1 style={{ fontSize: "32px", marginBottom: "10px" }}>
-                    Vítej, soudruhu!
-                </h1>
-
-                <p style={{
-                    fontSize: "18px",
-                    maxWidth: "600px",
-                    margin: "0 auto 40px auto",
-                    color: "#333"
-                }}>
-                    Komise tvé přihlášení schválila.
-                    Vyber si kvíz a ukaž, co v tobě je.
+            <div className="home-header">
+                <h1 className="home-title">Vítej, soudruhu!</h1>
+                <p className="home-subtitle">
+                    Komise tvé přihlášení schválila. Vyber si kategorii, zvol kvíz a ukaž, co v tobě je.
                 </p>
             </div>
 
-            {/* GRID KARTIČEK S KVÍZY */}
-            <div
-                style={{
-                    display: "grid",
-                    gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-                    gap: "20px",
-                    maxWidth: "1000px",
-                    margin: "0 auto"
-                }}
-            >
-                {quizzes.map((quiz) => (
-                    <div
-                        key={quiz.id}
-                        style={{
-                            padding: "20px",
-                            borderRadius: "10px",
-                            background: "white",
-                            boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
-                            textAlign: "center",
-                            transition: "0.2s"
-                        }}
-                        onMouseOver={(e) => e.currentTarget.style.transform = "scale(1.03)"}
-                        onMouseOut={(e) => e.currentTarget.style.transform = "scale(1)"}
+            {/*ZÁLOŽKY PRO FILTROVÁNÍ*/}
+            <div className="category-tabs">
+                {categories.map(category => (
+                    <button
+                        key={category}
+                        className={`tab-button ${activeCategory === category ? "active" : ""}`}
+                        onClick={() => setActiveCategory(category)}
                     >
-                        <h2 style={{ marginBottom: "10px" }}>{quiz.title}</h2>
-                        <p style={{ minHeight: "50px", color: "#555" }}>{quiz.description}</p>
-
-                        <button
-                            onClick={() => startQuiz(quiz.code)}
-                            style={{
-                                marginTop: "15px",
-                                padding: "10px 20px",
-                                background: "#0275d8",
-                                color: "white",
-                                border: "none",
-                                borderRadius: "6px",
-                                cursor: "pointer",
-                                fontSize: "16px"
-                            }}
-                        >
-                            Spustit kvíz
-                        </button>
-                    </div>
+                        {category}
+                    </button>
                 ))}
+            </div>
+
+            {/*VYFILTROVANÉ KARTIČKY KVÍZŮ*/}
+            <div className="quizzes-grid">
+                {filteredQuizzes.length > 0 ? (
+                    filteredQuizzes.map((quiz) => (
+                        <div key={quiz.id} className="quiz-card">
+                            <div>
+                                <h2 className="quiz-title">{quiz.title}</h2>
+                                <p className="quiz-desc">{quiz.description}</p>
+                            </div>
+                            <button
+                                className="quiz-start-btn"
+                                onClick={() => startQuiz(quiz.code)}
+                            >
+                                Spustit kvíz
+                            </button>
+                        </div>
+                    ))
+                ) : (
+                    <p style={{ textAlign: "center", width: "100%", color: "#777", fontSize: "18px" }}>
+                        V této kategorii zatím nejsou žádné kvízy.
+                    </p>
+                )}
             </div>
         </div>
     );

@@ -24,8 +24,6 @@ class QuestionServiceTest {
     // Vložíme falešnou databázi do našeho skutečného Service
     @InjectMocks
     private QuestionService questionService;
-
-    // Spustí se před každým testem, aby se to čistě připravilo
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
