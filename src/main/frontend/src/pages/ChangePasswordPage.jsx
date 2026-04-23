@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./ChangePasswordPage.css";
 
 function ChangePasswordPage({ goBack }) {
     const [username, setUsername] = useState("");
@@ -50,44 +51,40 @@ function ChangePasswordPage({ goBack }) {
     };
 
     return (
-        <div style={{ padding: "40px", display: "flex", flexDirection: "column", alignItems: "center" }}>
-            <div style={{ width: "100%", maxWidth: "300px" }}>
-                <button onClick={goBack} style={{ marginBottom: "20px", cursor: "pointer" }}>⬅ Zpět</button>
-                <h2>Změna hesla</h2>
+        <div className="change-password-container">
+            <div className="change-password-card">
 
-                <form onSubmit={handleChangePassword} style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+                <div className="change-password-back-button">
+                    <button onClick={goBack}>⬅ Zpět</button>
+                </div>
+
+                <h2 className="change-password-title">Změna hesla</h2>
+
+                <form onSubmit={handleChangePassword} className="change-password-form-group">
                     <input
-                        placeholder="Uživatelské jméno"
+                        className="change-password-input"
+                        placeholder="Uživatel"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
-                        style={{ padding: "8px" }}
                     />
 
                     <input
+                        className="change-password-input"
                         type="password"
                         placeholder="Staré heslo"
                         value={oldPassword}
                         onChange={(e) => setOldPassword(e.target.value)}
-                        style={{ padding: "8px" }}
                     />
 
                     <input
+                        className="change-password-input"
                         type="password"
                         placeholder="Nové heslo"
                         value={newPassword}
                         onChange={(e) => setNewPassword(e.target.value)}
-                        style={{ padding: "8px", marginTop: "10px" }}
                     />
 
-                    <input
-                        type="password"
-                        placeholder="Potvrďte nové heslo"
-                        value={confirmNewPassword}
-                        onChange={(e) => setConfirmNewPassword(e.target.value)}
-                        style={{ padding: "8px" }}
-                    />
-
-                    <button type="submit" style={{ padding: "10px", marginTop: "10px", cursor: "pointer", backgroundColor: "#ff9800", color: "white", border: "none", borderRadius: "5px" }}>
+                    <button type="submit" className="change-password-button">
                         Změnit heslo
                     </button>
                 </form>

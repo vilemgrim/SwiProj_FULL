@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./LoginPage.css"; // Import CSS
 
 function LoginPage({ goBack, onLogin }) {
     const [username, setUsername] = useState("");
@@ -24,14 +25,9 @@ function LoginPage({ goBack, onLogin }) {
             if (result.success === true) {
                 alert("Přihlášení úspěšné!");
 
-                // bezpečné převedení admin flagu
                 const adminFlag = result.admin === true || result.admin === "true";
-
-                // ULOŽENÍ USERNAME
                 localStorage.setItem("username", username);
-
                 onLogin(username, adminFlag);
-
             } else {
                 alert("Špatné přihlašovací údaje!");
             }
@@ -42,28 +38,32 @@ function LoginPage({ goBack, onLogin }) {
     };
 
     return (
-        <div style={{ padding: "40px", display: "flex", flexDirection: "column", alignItems: "center" }}>
-            <div style={{ width: "100%", maxWidth: "300px" }}>
-                <button onClick={goBack} style={{ marginBottom: "20px", cursor: "pointer" }}>⬅ Zpět</button>
-                <h2>Přihlášení</h2>
+        <div className="login-container"> {/* Hlavní obal */}
+            <div className="login-card"> {/* Karta */}
 
-                <form onSubmit={handleLogin} style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+                <div className="login-back-button">
+                    <button onClick={goBack}>⬅ Zpět</button>
+                </div>
+
+                <h2 className="login-title">Přihlášení</h2>
+
+                <form onSubmit={handleLogin} className="login-form-group">
                     <input
+                        className="login-input"
                         placeholder="Uživatel"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
-                        style={{ padding: "8px" }}
                     />
 
                     <input
+                        className="login-input"
                         type="password"
                         placeholder="Heslo"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        style={{ padding: "8px" }}
                     />
 
-                    <button type="submit" style={{ padding: "10px", marginTop: "10px", cursor: "pointer" }}>
+                    <button type="submit" className="login-button">
                         Přihlásit
                     </button>
                 </form>
