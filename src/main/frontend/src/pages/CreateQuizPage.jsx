@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import AdminMenu from "../components/AdminMenu";
+import "../styles/CreateQuizPage.css";
 
 function CreateQuizPage({ username, isAdmin, logout }) {
     const [code, setCode] = useState("");
@@ -14,7 +15,6 @@ function CreateQuizPage({ username, isAdmin, logout }) {
             return;
         }
 
-        // Automatický převod kódu na velká písmena bez mezer (např. "moje java" -> "MOJE_JAVA")
         const formattedCode = code.trim().toUpperCase().replace(/\s+/g, '_');
 
         try {
@@ -46,61 +46,61 @@ function CreateQuizPage({ username, isAdmin, logout }) {
     };
 
     return (
-        <div style={{ minHeight: "100vh", backgroundColor: "#f5f7fb", padding: "20px", display: "flex", flexDirection: "row" }}>
+        <div className="create-quiz-container">
 
-            {/* PANEL VPRAVO */}
-            <div style={{ flexShrink: 0 }}>
+            {/* PANEL MENU */}
+            <div className="create-quiz-menu">
                 <AdminMenu username={username} isAdmin={isAdmin} logout={logout} />
             </div>
 
-            {/* OBSAH VLEVO */}
-            <div style={{ flexGrow: 1, marginLeft: "40px", maxWidth: "600px" }}>
-                <h2 style={{ marginBottom: "20px", fontWeight: "600", color: "#333" }}>
+            {/* OBSAH */}
+            <div className="create-quiz-content">
+                <h2 className="create-quiz-title">
                     Vytvořit nový kvíz
                 </h2>
 
-                <div style={{ backgroundColor: "white", padding: "30px", borderRadius: "8px", boxShadow: "0 2px 8px rgba(0,0,0,0.1)" }}>
-                    <form onSubmit={handleCreateQuiz} style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
+                <div className="create-quiz-card">
+                    <form onSubmit={handleCreateQuiz} className="create-form-group">
 
                         <div>
-                            <label><strong>Kód kvízu (např. JAVA_01):</strong></label><br/>
+                            <label className="create-label">Kód kvízu (např. JAVA_01):</label>
                             <input
                                 type="text"
+                                className="create-input"
                                 placeholder="Zadejte unikátní kód..."
                                 value={code}
                                 onChange={(e) => setCode(e.target.value)}
-                                style={{ width: "100%", padding: "10px", marginTop: "5px", borderRadius: "5px", border: "1px solid #ccc" }}
                             />
-                            <small style={{ color: "#777" }}>Systém ho sám převede na velká písmena.</small>
+                            <small className="create-helper-text">Systém ho sám převede na velká písmena bez mezer.</small>
                         </div>
 
                         <div>
-                            <label><strong>Název na kartičce:</strong></label><br/>
+                            <label className="create-label">Název na kartičce:</label>
                             <input
                                 type="text"
+                                className="create-input"
                                 placeholder="Např.: Základy programování v Javě"
                                 value={title}
                                 onChange={(e) => setTitle(e.target.value)}
-                                style={{ width: "100%", padding: "10px", marginTop: "5px", borderRadius: "5px", border: "1px solid #ccc" }}
                             />
                         </div>
-                        <small style={{ color: "#777", display: "block", marginTop: "5px" }}>
+
+                        <div className="create-tip">
                             💡 Tip: Aby se kvíz správně zařadil na hlavní stránce, použijte v názvu nebo popisku slovo
                             <b> "zeměpis"</b> (pro geografii) nebo <b>"univerzita"</b> (pro info o OU).
-                        </small>
+                        </div>
 
                         <div>
-                            <label><strong>Popisek:</strong></label><br/>
+                            <label className="create-label">Popisek:</label>
                             <textarea
+                                className="create-textarea"
                                 placeholder="Např.: Otestuj si, co víš o objektech a třídách."
                                 value={description}
                                 onChange={(e) => setDescription(e.target.value)}
-                                rows="3"
-                                style={{ width: "100%", padding: "10px", marginTop: "5px", borderRadius: "5px", border: "1px solid #ccc", resize: "vertical" }}
                             />
                         </div>
 
-                        <button type="submit" style={{ padding: "12px", backgroundColor: "#28a745", color: "white", border: "none", borderRadius: "6px", cursor: "pointer", fontWeight: "bold", marginTop: "10px", fontSize: "16px" }}>
+                        <button type="submit" className="create-submit-btn">
                             ➕ Založit kvíz
                         </button>
                     </form>

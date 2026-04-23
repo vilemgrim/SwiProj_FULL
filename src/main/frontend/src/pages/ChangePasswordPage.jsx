@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./ChangePasswordPage.css";
+import "../styles/ChangePasswordPage.css";
 
 function ChangePasswordPage({ goBack }) {
     const [username, setUsername] = useState("");

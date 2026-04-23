@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import AdminMenu from "../components/AdminMenu";
-import "./HomePage.css";
+import "../styles/HomePage.css";
 
 function HomePage(props) {
     const navigate = useNavigate();
