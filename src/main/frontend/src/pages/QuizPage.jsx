@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "../styles/QuizPage.css";
 
 function QuizPage() {
     const [questions, setQuestions] = useState([]);
@@ -36,47 +37,24 @@ function QuizPage() {
 
     // Uložení výsledku po dokončení kvízu
     useEffect(() => {
-        if (finished) {
+        if (finished && questions.length > 0) {
             fetch("http://localhost:8080/api/results/save", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    username: localStorage.getItem("username"),
+                    username: localStorage.getItem("username") || "Anonym",
                     quiz: quizType,
                     score: score,
                     total: questions.length
                 })
-            });
+            }).catch(err => console.error("Chyba při ukládání skóre:", err));
         }
-    }, [finished]);
+    }, [finished, questions.length, quizType, score]);
 
-    if (loading) {
-        return <div style={{ textAlign: "center", marginTop: "40px" }}>Načítám otázky...</div>;
-    }
-
-    if (error) {
-        return (
-            <div style={{ textAlign: "center", marginTop: "40px", color: "red" }}>
-                <h2>Chyba při načítání kvízu</h2>
-                <p>Zkontroluj, jestli běží backend na portu 8080.</p>
-            </div>
-        );
-    }
-
-    if (questions.length === 0) {
-        return (
-            <div style={{ textAlign: "center", marginTop: "40px" }}>
-                <h2>Žádné otázky nebyly načteny</h2>
-                <p>Zkontroluj databázi nebo backend.</p>
-            </div>
-        );
-    }
-
-    const current = questions[index];
-
+    // --- FUNKCE PRO OBSLUHU TLAČÍTEK ---
     const handleAnswer = (option) => {
         setSelected(option);
-        if (option === current.correct) {
+        if (option === questions[index].correct) {
             setScore(prev => prev + 1);
         }
     };
@@ -103,110 +81,116 @@ function QuizPage() {
         setFinished(true);
     };
 
-    // Výsledková stránka
-    if (finished) {
-        return (
-            <div style={{ textAlign: "center", marginTop: "40px" }}>
-                <h2>Kvíz dokončen</h2>
-                <p>Skóre: {score} / {questions.length}</p>
+    // --- POMOCNÁ FUNKCE PRO BARVU TLAČÍTEK ---
+    const getOptionClassName = (opt) => {
+        if (selected === null) return "quiz-option-btn";
+        if (opt === questions[index].correct) return "quiz-option-btn correct";
+        if (opt === selected) return "quiz-option-btn wrong";
+        return "quiz-option-btn";
+    };
 
-                <button
-                    onClick={() => navigate("/home")}
-                    style={{
-                        marginTop: "20px",
-                        padding: "10px 20px",
-                        background: "#28a745",
-                        color: "white",
-                        border: "none",
-                        borderRadius: "6px",
-                        cursor: "pointer",
-                        fontSize: "16px"
-                    }}
-                >
-                    Zpět na hlavní stránku
-                </button>
+    // ==========================================
+    // VYKRESLOVÁNÍ OBRAZOVKY (RENDER)
+    // ==========================================
+
+    if (loading) {
+        return (
+            <div className="quiz-page-wrapper">
+                <div className="quiz-message">⏳ Načítám otázky komise...</div>
             </div>
         );
     }
 
-    // Hlavní UI kvízu
-    return (
-        <div style={{ maxWidth: "600px", margin: "40px auto", textAlign: "center" }}>
-            <h2>Otázka {index + 1} / {questions.length}</h2>
-            <p style={{ fontSize: "20px", marginBottom: "20px" }}>{current.question}</p>
+    if (error) {
+        return (
+            <div className="quiz-page-wrapper">
+                <div className="quiz-container quiz-error">
+                    <h2>❌ Chyba při načítání kvízu</h2>
+                    <p>Zkontroluj, jestli běží backend na portu 8080.</p>
+                </div>
+            </div>
+        );
+    }
 
-            {current.options.map((opt, i) => (
-                <button
-                    key={i}
-                    onClick={() => handleAnswer(opt)}
-                    disabled={selected !== null}
-                    style={{
-                        width: "100%",
-                        padding: "12px",
-                        margin: "8px 0",
-                        borderRadius: "6px",
-                        border: "1px solid #ccc",
-                        cursor: selected === null ? "pointer" : "default",
-                        background:
-                            selected === null
-                                ? "white"
-                                : opt === current.correct
-                                    ? "#b6f7b0"
-                                    : opt === selected
-                                        ? "#ffb3b3"
-                                        : "white"
-                    }}
-                >
-                    {opt}
-                </button>
-            ))}
+    if (questions.length === 0) {
+        return (
+            <div className="quiz-page-wrapper">
+                <div className="quiz-container">
+                    <h2>📭 Žádné otázky nebyly načteny</h2>
+                    <p>Zkontroluj databázi nebo nastavení backendu.</p>
+                </div>
+            </div>
+        );
+    }
 
-            <div style={{ marginTop: "20px" }}>
-                {selected !== null && (
-                    <button
-                        onClick={nextQuestion}
-                        style={{
-                            padding: "10px 20px",
-                            background: "#007bff",
-                            color: "white",
-                            border: "none",
-                            borderRadius: "6px",
-                            cursor: "pointer",
-                            marginRight: "10px"
-                        }}
-                    >
-                        Další otázka
+    // 1. SCÉNÁŘ: Výsledková stránka (Kvíz je hotový)
+    if (finished) {
+        return (
+            <div className="quiz-page-wrapper">
+                <div className="quiz-container">
+                    <h2 className="quiz-summary-title">🎉 Kvíz dokončen!</h2>
+                    <p style={{ fontSize: "18px", color: "#666" }}>Tvé konečné skóre je:</p>
+
+                    <div className="quiz-score-display">
+                        {score} / {questions.length}
+                    </div>
+
+                    <p style={{ marginBottom: "30px", color: "#777" }}>
+                        Výsledek byl úspěšně uložen do databáze.
+                    </p>
+
+                    <button className="quiz-home-btn" onClick={() => navigate("/home")}>
+                        🏠 Zpět na hlavní stránku
                     </button>
-                )}
+                </div>
+            </div>
+        );
+    }
 
-                <button
-                    onClick={skipQuestion}
-                    style={{
-                        padding: "10px 20px",
-                        background: "#ffc107",
-                        color: "black",
-                        border: "none",
-                        borderRadius: "6px",
-                        cursor: "pointer",
-                        marginRight: "10px"
-                    }}
-                >
-                    Přeskočit
-                </button>
+    // 2. SCÉNÁŘ: Hlavní UI kvízu (Kvíz probíhá)
+    const current = questions[index];
 
-                <button
-                    onClick={endQuiz}
-                    style={{
-                        padding: "10px 20px",
-                        background: "#dc3545",
-                        color: "white",
-                        border: "none",
-                        borderRadius: "6px",
-                        cursor: "pointer"
-                    }}
-                >
-                    Ukončit kvíz
-                </button>
+    return (
+        <div className="quiz-page-wrapper">
+            <div className="quiz-container">
+
+                <div className="quiz-counter">
+                    Otázka {index + 1} z {questions.length}
+                </div>
+
+                <h2 className="quiz-question">{current.question}</h2>
+
+                <div className="quiz-options-grid">
+                    {current.options.map((opt, i) => (
+                        <button
+                            key={i}
+                            onClick={() => handleAnswer(opt)}
+                            disabled={selected !== null}
+                            className={getOptionClassName(opt)}
+                        >
+                            {opt}
+                        </button>
+                    ))}
+                </div>
+
+                <div className="quiz-actions">
+                    {selected !== null && (
+                        <button onClick={nextQuestion} className="quiz-action-btn btn-next">
+                            Další otázka ➡️
+                        </button>
+                    )}
+
+                    {selected === null && (
+                        <button onClick={skipQuestion} className="quiz-action-btn btn-skip">
+                            Přeskočit ⏭️
+                        </button>
+                    )}
+
+                    <button onClick={endQuiz} className="quiz-action-btn btn-end">
+                        ⏹️ Ukončit kvíz
+                    </button>
+                </div>
+
             </div>
         </div>
     );

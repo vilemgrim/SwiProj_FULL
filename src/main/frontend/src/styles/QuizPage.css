@@ -1,0 +1,153 @@
+/* QuizPage.css */
+
+.quiz-page-wrapper {
+    min-height: 100vh;
+    background-color: #e8f0fe;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.quiz-container {
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+}
+
+/* --- TEXTY OTÁZEK --- */
+.quiz-counter {
+    color: #6c757d;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.quiz-question {
+    color: #1e3c72;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    line-height: 1.4;
+}
+
+/* --- TLAČÍTKA S ODPOVĚĎMI --- */
+.quiz-options-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.quiz-option-btn {
+    padding: 15px 20px;
+    background-color: #f8f9fa;
+    border: 2px solid #e9ecef;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: 500;
+    color: #333;
+}
+
+.quiz-option-btn:hover:not(:disabled) {
+    background-color: #e0eafc;
+    border-color: #cddcf9;
+}
+
+/* Zelená pro správnou odpověď */
+.quiz-option-btn.correct {
+    background-color: #d4edda;
+    border-color: #28a745;
+    color: #155724;
+}
+
+/* Červená pro špatnou odpověď */
+.quiz-option-btn.wrong {
+    background-color: #f8d7da;
+    border-color: #dc3545;
+    color: #721c24;
+}
+
+/* Deaktivovaná tlačítka (když už uživatel odpověděl) */
+.quiz-option-btn:disabled {
+    cursor: default;
+    opacity: 0.7;
+}
+
+/* --- SPODNÍ OVLÁDACÍ TLAČÍTKA --- */
+.quiz-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.quiz-action-btn {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    color: white;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.quiz-action-btn:active { transform: scale(0.98); }
+
+.btn-next { background-color: #0275d8; }
+.btn-next:hover { background-color: #025aa5; }
+
+.btn-skip { background-color: #ffc107; color: #333; }
+.btn-skip:hover { background-color: #e0a800; }
+
+.btn-end { background-color: #dc3545; }
+.btn-end:hover { background-color: #c82333; }
+
+/* --- ZÁVĚREČNÁ OBRAZOVKA (SKÓRE) --- */
+.quiz-summary-title {
+    color: #1e3c72;
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+.quiz-score-display {
+    font-size: 70px;
+    font-weight: bold;
+    color: #28a745;
+    margin: 20px 0;
+    text-shadow: 0 4px 10px rgba(40, 167, 69, 0.2);
+}
+
+.quiz-home-btn {
+    padding: 15px 30px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.quiz-home-btn:hover {
+    background-color: #218838;
+}
+
+/* Zprávy (Načítání / Chyby) */
+.quiz-message {
+    text-align: center;
+    font-size: 20px;
+    color: #555;
+}
+.quiz-error { color: #dc3545; }
