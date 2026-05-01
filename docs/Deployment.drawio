@@ -1,0 +1,47 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Stránka-1" id="VVop3fs6Qw9SvdBPRU0b">
+    <mxGraphModel dx="1768" dy="979" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-134" parent="1" style="whiteSpace=wrap;strokeWidth=2;verticalAlign=top;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="«device»&#xa;Databázový Server" vertex="1">
+          <mxGeometry height="223" width="498" x="1181" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-135" parent="k5ElpnDtR24m7z8CYY1l-134" style="whiteSpace=wrap;strokeWidth=2;verticalAlign=top;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="«executionEnvironment»&#xa;PostgreSQL" vertex="1">
+          <mxGeometry height="148" width="428" x="43" y="46" as="geometry" />
+        </mxCell>
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-136" parent="k5ElpnDtR24m7z8CYY1l-135" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="«artifact»&#xa;quiz_database&#xa;(Schéma databáze)" vertex="1">
+          <mxGeometry height="78" width="328" x="58" y="43" as="geometry" />
+        </mxCell>
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-137" parent="1" style="whiteSpace=wrap;strokeWidth=2;verticalAlign=top;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="«device»&#xa;Aplikační Server" vertex="1">
+          <mxGeometry height="223" width="471" x="607" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-138" parent="k5ElpnDtR24m7z8CYY1l-137" style="whiteSpace=wrap;strokeWidth=2;verticalAlign=top;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="«executionEnvironment»&#xa;Java Runtime (JRE)" vertex="1">
+          <mxGeometry height="148" width="401" x="43" y="46" as="geometry" />
+        </mxCell>
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-139" parent="k5ElpnDtR24m7z8CYY1l-138" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="«artifact»&#xa;backend.jar&#xa;(Spring Boot)" vertex="1">
+          <mxGeometry height="78" width="301" x="58" y="43" as="geometry" />
+        </mxCell>
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-140" parent="1" style="whiteSpace=wrap;strokeWidth=2;verticalAlign=top;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="«device»&#xa;Klientské zařízení (PC/Mobil)" vertex="1">
+          <mxGeometry height="223" width="430" x="20" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-141" parent="k5ElpnDtR24m7z8CYY1l-140" style="whiteSpace=wrap;strokeWidth=2;verticalAlign=top;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="«executionEnvironment»&#xa;Webový prohlížeč" vertex="1">
+          <mxGeometry height="148" width="360" x="43" y="46" as="geometry" />
+        </mxCell>
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-142" parent="k5ElpnDtR24m7z8CYY1l-141" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="«artifact»&#xa;Frontend aplikace&#xa;(React)" vertex="1">
+          <mxGeometry height="78" width="260" x="58" y="43" as="geometry" />
+        </mxCell>
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-143" edge="1" parent="1" source="k5ElpnDtR24m7z8CYY1l-140" style="curved=1;startArrow=none;endArrow=block;exitX=1;exitY=0.5;entryX=0;entryY=0.5;rounded=0;" target="k5ElpnDtR24m7z8CYY1l-137" value="«HTTP / REST»">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-144" edge="1" parent="1" source="k5ElpnDtR24m7z8CYY1l-137" style="curved=1;startArrow=none;endArrow=block;exitX=1;exitY=0.5;entryX=0;entryY=0.5;rounded=0;" target="k5ElpnDtR24m7z8CYY1l-134" value="«JDBC»">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

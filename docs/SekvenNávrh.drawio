@@ -1,0 +1,79 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Stránka-1" id="VVop3fs6Qw9SvdBPRU0b">
+    <mxGraphModel dx="1768" dy="979" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-188" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=65;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="QuizPage (React)" vertex="1">
+          <mxGeometry height="627" width="183" x="20" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-189" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=65;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="QuizResultController" vertex="1">
+          <mxGeometry height="627" width="166" x="318" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-190" parent="k5ElpnDtR24m7z8CYY1l-189" style="points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="" vertex="1">
+          <mxGeometry height="425" width="10" x="78" y="107" as="geometry" />
+        </mxCell>
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-191" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=65;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="QuizResultService" vertex="1">
+          <mxGeometry height="627" width="150" x="700" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-192" parent="k5ElpnDtR24m7z8CYY1l-191" style="points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="" vertex="1">
+          <mxGeometry height="243" width="10" x="70" y="227" as="geometry" />
+        </mxCell>
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-193" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=65;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="QuizResultRepository" vertex="1">
+          <mxGeometry height="627" width="170" x="950" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-194" parent="k5ElpnDtR24m7z8CYY1l-193" style="points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="" vertex="1">
+          <mxGeometry height="129" width="10" x="80" y="279" as="geometry" />
+        </mxCell>
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-195" edge="1" parent="1" source="k5ElpnDtR24m7z8CYY1l-188" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" target="k5ElpnDtR24m7z8CYY1l-190" value="1: POST /api/results/save {json}">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="265" y="127" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-196" edge="1" parent="1" source="k5ElpnDtR24m7z8CYY1l-190" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" target="k5ElpnDtR24m7z8CYY1l-192" value="1.1: saveResult(username, quiz, score, total)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="598" y="247" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-197" edge="1" parent="1" source="k5ElpnDtR24m7z8CYY1l-192" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" target="k5ElpnDtR24m7z8CYY1l-194" value="1.1.1: save(new QuizResult)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="915" y="299" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-198" edge="1" parent="1" source="k5ElpnDtR24m7z8CYY1l-193" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" target="k5ElpnDtR24m7z8CYY1l-192" value="1.1.2: return savedResult">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="916" y="438" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-199" edge="1" parent="1" source="k5ElpnDtR24m7z8CYY1l-192" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" target="k5ElpnDtR24m7z8CYY1l-190" value="1.2: return (void)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="599" y="490" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-200" edge="1" parent="1" source="k5ElpnDtR24m7z8CYY1l-190" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" target="k5ElpnDtR24m7z8CYY1l-188" value="1.3: return HTTP 200 OK">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="266" y="542" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-201" parent="1" style="fillColor=#ffff88;strokeColor=#9E916F;fontColor=light-dark(#333333,#cccccc);" value="Controller vytáhne data z Map body:&#xa;username, quiz, score, total" vertex="1">
+          <mxGeometry height="68" width="277" x="426" y="147" as="geometry" />
+        </mxCell>
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-202" parent="1" style="fillColor=#ffff88;strokeColor=#9E916F;fontColor=light-dark(#333333,#cccccc);" value="Hibernate/JPA automaticky&#xa;řeší persistenci do DB,&#xa;není třeba dále modelovat." vertex="1">
+          <mxGeometry height="87" width="211" x="1060" y="319" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

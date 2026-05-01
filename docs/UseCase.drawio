@@ -1,0 +1,70 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Stránka-1" id="VVop3fs6Qw9SvdBPRU0b">
+    <mxGraphModel dx="1414" dy="783" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-75" connectable="0" parent="1" style="group" value="" vertex="1">
+          <mxGeometry height="600" width="870" x="230" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-52" parent="k5ElpnDtR24m7z8CYY1l-75" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;" value="User" vertex="1">
+          <mxGeometry height="109.09090909090908" width="56.98689956331878" x="208.9519650655022" y="59.00000000000007" as="geometry" />
+        </mxCell>
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-58" connectable="0" parent="k5ElpnDtR24m7z8CYY1l-75" style="group" value="" vertex="1">
+          <mxGeometry height="599.9999999999999" width="533.7772925764192" x="336.2227074235808" as="geometry" />
+        </mxCell>
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-51" parent="k5ElpnDtR24m7z8CYY1l-58" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);spacingTop=0;" value="Kvízový portál" vertex="1">
+          <mxGeometry height="36.734693877551024" width="533.7772925764192" as="geometry" />
+        </mxCell>
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-57" parent="k5ElpnDtR24m7z8CYY1l-58" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);spacingTop=0;" value="" vertex="1">
+          <mxGeometry height="563.265306122449" width="533.7772925764192" y="36.734693877551024" as="geometry" />
+        </mxCell>
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-53" parent="k5ElpnDtR24m7z8CYY1l-58" style="ellipse;whiteSpace=wrap;html=1;" value="Zahrát si kvíz" vertex="1">
+          <mxGeometry height="83.85454545454543" width="227.9475982532751" x="142.46724890829694" y="97.96363636363635" as="geometry" />
+        </mxCell>
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-66" parent="k5ElpnDtR24m7z8CYY1l-58" style="ellipse;whiteSpace=wrap;html=1;" value="Tvorba kvízu" vertex="1">
+          <mxGeometry height="81.63636363636363" width="227.9475982532751" x="152.91484716157206" y="259.18181818181813" as="geometry" />
+        </mxCell>
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-69" parent="k5ElpnDtR24m7z8CYY1l-58" style="ellipse;whiteSpace=wrap;html=1;" value="Správa systému" vertex="1">
+          <mxGeometry height="81.8181818181818" width="227.9475982532751" x="152.91484716157206" y="445.4545454545454" as="geometry" />
+        </mxCell>
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-54" edge="1" parent="k5ElpnDtR24m7z8CYY1l-75" source="k5ElpnDtR24m7z8CYY1l-52" style="endArrow=none;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0.467;exitY=0.683;exitDx=0;exitDy=0;exitPerimeter=0;" target="k5ElpnDtR24m7z8CYY1l-53" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="-474.89082969432314" y="159.00000000000006" as="sourcePoint" />
+            <mxPoint x="-379.91266375545854" y="68.09090909090916" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-60" parent="k5ElpnDtR24m7z8CYY1l-75" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" value="Admin" vertex="1">
+          <mxGeometry height="109.09090909090908" width="56.98689956331878" x="110.17467248908298" y="245.4545454545454" as="geometry" />
+        </mxCell>
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-63" parent="k5ElpnDtR24m7z8CYY1l-75" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" value="SuperAdmin" vertex="1">
+          <mxGeometry height="109.09090909090908" width="56.98689956331878" y="418.09090909090924" as="geometry" />
+        </mxCell>
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-67" edge="1" parent="k5ElpnDtR24m7z8CYY1l-75" source="k5ElpnDtR24m7z8CYY1l-60" style="endArrow=none;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0.5;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;" target="k5ElpnDtR24m7z8CYY1l-66" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="-37.991266375545855" y="486.27272727272737" as="sourcePoint" />
+            <mxPoint x="56.98689956331878" y="395.3636363636365" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-71" edge="1" parent="k5ElpnDtR24m7z8CYY1l-75" source="k5ElpnDtR24m7z8CYY1l-63" style="endArrow=none;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0.5;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;" target="k5ElpnDtR24m7z8CYY1l-69" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="-37.991266375545855" y="486.27272727272737" as="sourcePoint" />
+            <mxPoint x="56.98689956331878" y="395.3636363636365" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-72" edge="1" parent="k5ElpnDtR24m7z8CYY1l-75" source="k5ElpnDtR24m7z8CYY1l-60" style="endArrow=block;dashed=1;endFill=0;endSize=12;html=1;rounded=0;entryX=0;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;" target="k5ElpnDtR24m7z8CYY1l-52" value="">
+          <mxGeometry relative="1" width="160" as="geometry">
+            <mxPoint x="-151.96506550218342" y="431.72727272727286" as="sourcePoint" />
+            <mxPoint x="151.96506550218342" y="431.72727272727286" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-74" edge="1" parent="k5ElpnDtR24m7z8CYY1l-75" source="k5ElpnDtR24m7z8CYY1l-63" style="endArrow=block;dashed=1;endFill=0;endSize=12;html=1;rounded=0;entryX=0;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;" target="k5ElpnDtR24m7z8CYY1l-60" value="">
+          <mxGeometry relative="1" width="160" as="geometry">
+            <mxPoint x="-151.96506550218342" y="431.72727272727286" as="sourcePoint" />
+            <mxPoint x="151.96506550218342" y="431.72727272727286" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

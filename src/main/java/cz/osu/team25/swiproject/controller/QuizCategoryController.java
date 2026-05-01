@@ -13,7 +13,6 @@ import java.util.List;
 @CrossOrigin
 public class QuizCategoryController {
 
-    // TOHLE JE TEN ŘÁDEK, KTERÝ TI TAM CHYBĚL NEBO SE ZTRATIL:
     // Tímto si "přitáhneme" repozitář, abychom ho mohli používat v metodách níže
     @Autowired
     private QuizCategoryRepository quizCategoryRepository;

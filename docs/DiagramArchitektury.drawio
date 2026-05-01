@@ -1,0 +1,85 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Stránka-1" id="VVop3fs6Qw9SvdBPRU0b">
+    <mxGraphModel dx="1768" dy="2148" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-222" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="&#xa;" vertex="1">
+          <mxGeometry height="362" width="550" x="10" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-203" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=#336791;strokeColor=#333;fontColor=white;" value="Datová část" vertex="1">
+          <mxGeometry height="121" width="164" x="334" y="892" as="geometry" />
+        </mxCell>
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-204" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="Serverová část" vertex="1">
+          <mxGeometry height="362" width="288" x="272" y="456" as="geometry" />
+        </mxCell>
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-205" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=#6DB33F;strokeColor=#333;fontColor=white;" value="Technologie: Spring Boot (Java)" vertex="1">
+          <mxGeometry height="30" width="248" x="290" y="476" as="geometry" />
+        </mxCell>
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-206" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="Klientská část" vertex="1">
+          <mxGeometry height="30" width="550" x="10" y="-10" as="geometry" />
+        </mxCell>
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-207" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=#61DAFB;strokeColor=#333;fontColor=black;" value="Technologie: React" vertex="1">
+          <mxGeometry height="104" width="510" x="40" y="253" as="geometry" />
+        </mxCell>
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-208" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="Uživatel" vertex="1">
+          <mxGeometry height="54" width="119" x="112" y="45" as="geometry" />
+        </mxCell>
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-209" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="Prohlížeč" vertex="1">
+          <mxGeometry height="54" width="125" x="109" y="149" as="geometry" />
+        </mxCell>
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-210" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="React Components" vertex="1">
+          <mxGeometry height="54" width="193" x="75" y="278" as="geometry" />
+        </mxCell>
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-211" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="Axios / REST Client" vertex="1">
+          <mxGeometry height="54" width="197" x="318" y="278" as="geometry" />
+        </mxCell>
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-223" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=#6DB33F;strokeColor=#333;fontColor=white;" value="" vertex="1">
+          <mxGeometry height="312" width="248" x="290" y="500" as="geometry" />
+        </mxCell>
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-212" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="REST Controllers" vertex="1">
+          <mxGeometry height="54" width="178" x="327" y="506" as="geometry" />
+        </mxCell>
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-213" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="Service Layer" vertex="1">
+          <mxGeometry height="54" width="156" x="339" y="610" as="geometry" />
+        </mxCell>
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-214" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="Spring Data JPA" vertex="1">
+          <mxGeometry height="54" width="171" x="331" y="714" as="geometry" />
+        </mxCell>
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-215" parent="1" style="shape=cylinder3;boundedLbl=1;backgroundOutline=1;size=10;strokeWidth=2;whiteSpace=wrap;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="PostgreSQL" vertex="1">
+          <mxGeometry height="71" width="94" x="369" y="917" as="geometry" />
+        </mxCell>
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-216" edge="1" parent="1" source="k5ElpnDtR24m7z8CYY1l-208" style="curved=1;startArrow=none;endArrow=none;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" target="k5ElpnDtR24m7z8CYY1l-209" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-217" edge="1" parent="1" source="k5ElpnDtR24m7z8CYY1l-209" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" target="k5ElpnDtR24m7z8CYY1l-210" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-218" edge="1" parent="1" source="k5ElpnDtR24m7z8CYY1l-211" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" target="k5ElpnDtR24m7z8CYY1l-212" value="HTTP / JSON">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-219" edge="1" parent="1" source="k5ElpnDtR24m7z8CYY1l-212" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" target="k5ElpnDtR24m7z8CYY1l-213" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-220" edge="1" parent="1" source="k5ElpnDtR24m7z8CYY1l-213" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" target="k5ElpnDtR24m7z8CYY1l-214" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="k5ElpnDtR24m7z8CYY1l-221" edge="1" parent="1" source="k5ElpnDtR24m7z8CYY1l-214" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" target="k5ElpnDtR24m7z8CYY1l-215" value="JDBC">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
