@@ -38,8 +38,8 @@ function LoginPage({ goBack, onLogin }) {
     };
 
     return (
-        <div className="login-container"> {/* Hlavní obal */}
-            <div className="login-card"> {/* Karta */}
+        <div className="login-container">
+            <div className="login-card">
 
                 <div className="login-back-button">
                     <button onClick={goBack}>⬅ Zpět</button>

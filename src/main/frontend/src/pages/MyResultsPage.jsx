@@ -97,7 +97,6 @@ function MyResultsPage({ username, isAdmin, logout }) {
             }}
         >
 
-            {/* ⭐ PANEL VPRAVO */}
             <div style={{ flexShrink: 0 }}>
                 <AdminMenu
                     username={username}
@@ -106,7 +105,7 @@ function MyResultsPage({ username, isAdmin, logout }) {
                 />
             </div>
 
-            {/*  OBSAH VLEVO */}
+
             <div style={{
                 flexGrow: 1,
                 marginLeft: "40px",
@@ -121,7 +120,7 @@ function MyResultsPage({ username, isAdmin, logout }) {
                     Moje výsledky
                 </h2>
 
-                {/* ZÁLOŽKY */}
+
                 <div style={{ display: "flex", gap: "8px", marginBottom: "20px", flexWrap: "wrap" }}>
                     {quizTabs.map(tab => (
                         <button
@@ -188,7 +187,7 @@ function MyResultsPage({ username, isAdmin, logout }) {
                     }}
                 />
 
-                {/* TABULKA */}
+
                 <table style={{
                     width: "100%",
                     borderCollapse: "collapse",
@@ -214,7 +213,7 @@ function MyResultsPage({ username, isAdmin, logout }) {
                     </tbody>
                 </table>
 
-                {/* STRÁNKOVÁNÍ */}
+
                 <div style={{ marginTop: "20px", display: "flex", justifyContent: "center", gap: "10px" }}>
                     <button disabled={page === 1} onClick={() => setPage(page - 1)} style={pageBtn}>◀</button>
                     <span>Strana {page} / {totalPages}</span>

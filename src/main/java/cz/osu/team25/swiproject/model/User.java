@@ -15,7 +15,6 @@ public class User {
 
     private String password;
 
-    // Přidáno: role admin
     private boolean admin;
 
     public Long getId() {
@@ -39,7 +38,6 @@ public class User {
         this.password = password;
     }
 
-    // Getter a setter pro admina
     public boolean isAdmin() {
         return admin;
     }

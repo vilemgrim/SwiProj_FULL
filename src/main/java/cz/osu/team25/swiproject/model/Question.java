@@ -14,8 +14,8 @@ public class Question {
     private Long id;
 
     private String quiz;      // např. EU_CAPITALS
-    private String question;  // text otázky
-    private String correct;   // správná odpověď
+    private String question;
+    private String correct;
 
     public Question() {}
 
@@ -31,12 +31,12 @@ public class Question {
     public String getCorrect() { return correct; }
     public void setCorrect(String correct) { this.correct = correct; }
     @ElementCollection
-    // Tímto řekneme: "Vytvoř novou tabulku 'question_wrong_answers' a propoj ji přes 'question_id'"
+    //Vytvoří novou tabulku question_wrong_answers a propojí ji přes question_id"
     @CollectionTable(
             name = "question_wrong_answers",
             joinColumns = @JoinColumn(name = "question_id")
     )
-    // Tímto řekneme, jak se bude jmenovat ten samotný sloupeček s textem špatné odpovědi
+    //Sloupec
     @Column(name = "answer_text")
     private List<String> wrongAnswers = new ArrayList<>();
 

@@ -14,7 +14,7 @@ public class QuizCategory {
     @Column(nullable = false, unique = true)
     private String code;
 
-    // Hezký název, např. "Hlavní města Evropy"
+    // název, např. Hlavní města Evropy
     @Column(nullable = false)
     private String title;
 

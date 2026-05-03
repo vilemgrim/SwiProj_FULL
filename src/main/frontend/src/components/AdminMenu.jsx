@@ -17,7 +17,6 @@ function AdminMenu({ username, isAdmin, logout }) {
                 {isOpen ? "✖ Zavřít" : "☰ Menu"}
             </button>
 
-            {/* rozbalovací menu (ukáže se jen když isOpen === true) */}
             <div className={`admin-menu-content ${isOpen ? "open" : ""}`}>
                 <div className="admin-menu-header">
                     <div style={{ fontSize: "16px", color: "#333" }}><strong>{username}</strong></div>

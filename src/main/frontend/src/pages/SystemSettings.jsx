@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import AdminMenu from "../components/AdminMenu";
 
 function SystemSettingsPage({ username, isAdmin, logout }) {
-    // Stavy pro nastavení (načítáme z localStorage, nebo použije výchozí)
+    // Stavy pro nastavení (načítá z localStorage, nebo použije výchozí)
     const [questionCount, setQuestionCount] = useState(
         localStorage.getItem("globalQuestionCount") || 10
     );
@@ -18,13 +18,13 @@ function SystemSettingsPage({ username, isAdmin, logout }) {
         localStorage.setItem("globalQuestionCount", questionCount);
         localStorage.setItem("maintenanceMode", maintenanceMode);
 
-        alert("✅ Systémová nastavení byla úspěšně uložena!");
+        alert("Systémová nastavení byla úspěšně uložena!");
     };
 
     if (username !== "root") {
         return (
             <div style={{ textAlign: "center", marginTop: "50px", color: "red" }}>
-                <h2>⛔ Přístup odepřen</h2>
+                <h2>Přístup odepřen</h2>
                 <p>Tato stránka je určena pouze pro hlavního administrátora.</p>
             </div>
         );
@@ -48,7 +48,7 @@ function SystemSettingsPage({ username, isAdmin, logout }) {
 
                     <form onSubmit={handleSave} style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
 
-                        {/* NASTAVENÍ: Počet otázek */}
+
                         <div>
                             <label><strong>Výchozí počet otázek v kvízu:</strong></label><br/>
                             <input
@@ -62,7 +62,7 @@ function SystemSettingsPage({ username, isAdmin, logout }) {
                             <small style={{ color: "#777" }}>Určuje, kolik otázek se hráči vygeneruje při spuštění hry.</small>
                         </div>
 
-                        {/* NASTAVENÍ: Údržba */}
+
                         <div style={{ display: "flex", alignItems: "center", gap: "10px", backgroundColor: "#fff3cd", padding: "15px", borderRadius: "5px", border: "1px solid #ffeeba" }}>
                             <input
                                 type="checkbox"

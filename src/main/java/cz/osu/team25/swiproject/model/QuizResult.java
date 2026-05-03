@@ -20,6 +20,7 @@ public class QuizResult {
 
     public QuizResult() {}
 
+    //Filipe uprav
     public QuizResult(String username, String quiz, int score, int total) {
         this.username = username;
         this.quiz = quiz;
@@ -28,7 +29,6 @@ public class QuizResult {
         this.playedAt = new Date();
     }
 
-    // Getters & Setters
     public Long getId() { return id; }
     public String getUsername() { return username; }
     public String getQuiz() { return quiz; }

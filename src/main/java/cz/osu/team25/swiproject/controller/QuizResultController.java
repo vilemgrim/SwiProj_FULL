@@ -27,7 +27,7 @@ public class QuizResultController {
 
         service.saveResult(username, quiz, score, total);
     }
-
+    //Získání výsledků od uživatele
     @GetMapping("/user/{username}")
     public List<QuizResult> getUserResults(@PathVariable String username) {
         return service.getUserResults(username);

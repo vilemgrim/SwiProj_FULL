@@ -17,7 +17,7 @@ function QuizPage() {
     const quizType = params.get("type") || "EU_CAPITALS";
 
     useEffect(() => {
-        // Přečteme nastavení z paměti prohlížeče (pokud root nic neměnil, dáme výchozích 10)
+        // Počet otázek, pokud root neměnil, default je 10
         const count = localStorage.getItem("globalQuestionCount") || 10;
         fetch(`http://localhost:8080/api/questions/quiz?quiz=${quizType}&count=${count}`)
             .then(res => {
@@ -51,7 +51,6 @@ function QuizPage() {
         }
     }, [finished, questions.length, quizType, score]);
 
-    // --- FUNKCE PRO OBSLUHU TLAČÍTEK ---
     const handleAnswer = (option) => {
         setSelected(option);
         if (option === questions[index].correct) {
@@ -81,17 +80,13 @@ function QuizPage() {
         setFinished(true);
     };
 
-    // --- POMOCNÁ FUNKCE PRO BARVU TLAČÍTEK ---
+
     const getOptionClassName = (opt) => {
         if (selected === null) return "quiz-option-btn";
         if (opt === questions[index].correct) return "quiz-option-btn correct";
         if (opt === selected) return "quiz-option-btn wrong";
         return "quiz-option-btn";
     };
-
-    // ==========================================
-    // VYKRESLOVÁNÍ OBRAZOVKY (RENDER)
-    // ==========================================
 
     if (loading) {
         return (
@@ -123,12 +118,11 @@ function QuizPage() {
         );
     }
 
-    // 1. SCÉNÁŘ: Výsledková stránka (Kvíz je hotový)
     if (finished) {
         return (
             <div className="quiz-page-wrapper">
                 <div className="quiz-container">
-                    <h2 className="quiz-summary-title">🎉 Kvíz dokončen!</h2>
+                    <h2 className="quiz-summary-title">Kvíz dokončen!</h2>
                     <p style={{ fontSize: "18px", color: "#666" }}>Tvé konečné skóre je:</p>
 
                     <div className="quiz-score-display">
@@ -147,7 +141,6 @@ function QuizPage() {
         );
     }
 
-    // 2. SCÉNÁŘ: Hlavní UI kvízu (Kvíz probíhá)
     const current = questions[index];
 
     return (

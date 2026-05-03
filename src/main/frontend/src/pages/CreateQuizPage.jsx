@@ -11,7 +11,7 @@ function CreateQuizPage({ username, isAdmin, logout }) {
         e.preventDefault();
 
         if (!code || !title || !description) {
-            alert("⚠️ Vyplňte prosím všechna políčka.");
+            alert("Vyplňte prosím všechna políčka.");
             return;
         }
 
@@ -31,13 +31,13 @@ function CreateQuizPage({ username, isAdmin, logout }) {
             });
 
             if (response.ok) {
-                alert(`✅ Kvíz "${title}" byl úspěšně vytvořen!`);
+                alert(`Kvíz "${title}" byl úspěšně vytvořen!`);
                 // Vyčistíme formulář
                 setCode("");
                 setTitle("");
                 setDescription("");
             } else {
-                alert("❌ Chyba! Možná už kvíz s tímto kódem existuje.");
+                alert("Chyba! Možná už kvíz s tímto kódem existuje.");
             }
         } catch (error) {
             console.error(error);
@@ -48,12 +48,11 @@ function CreateQuizPage({ username, isAdmin, logout }) {
     return (
         <div className="create-quiz-container">
 
-            {/* PANEL MENU */}
+
             <div className="create-quiz-menu">
                 <AdminMenu username={username} isAdmin={isAdmin} logout={logout} />
             </div>
 
-            {/* OBSAH */}
             <div className="create-quiz-content">
                 <h2 className="create-quiz-title">
                     Vytvořit nový kvíz

@@ -54,13 +54,13 @@ public class AuthController {
         return ResponseEntity.ok(success);
     }
 
-    // 🔥 Seznam všech uživatelů
+    // Seznam všech uživatelů
     @GetMapping("/users")
     public List<User> getAllUsers() {
         return userService.getAllUsers();
     }
 
-    // 🔥 Povýšení na admina
+    // Povýšení na admina
     @PostMapping("/make-admin")
     public boolean makeAdmin(
             @RequestParam String caller,
@@ -69,7 +69,7 @@ public class AuthController {
         return userService.makeAdmin(caller, targetUser);
     }
 
-    // 🔥 Odebrání admina (jen superadmin)
+    // Odebrání admina (jen superadmin)
     @PostMapping("/remove-admin")
     public boolean removeAdmin(
             @RequestParam String caller,

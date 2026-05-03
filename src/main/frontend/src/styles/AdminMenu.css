@@ -41,7 +41,7 @@
     padding: 20px;
     margin-top: 10px;
     width: 250px;
-    display: none; /* Skryto ve výchozím stavu */
+    display: none;
     flex-direction: column;
 }
 

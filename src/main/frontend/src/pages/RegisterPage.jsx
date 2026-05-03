@@ -35,7 +35,7 @@ function RegisterPage({ goBack }) {
 
             if (result === true) {
                 alert("Registrace úspěšná!");
-                goBack(); // Vrátí tě do menu
+                goBack(); // Vrátí do menu
             } else {
                 alert("Uživatel už existuje!");
             }

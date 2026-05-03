@@ -17,17 +17,16 @@ public class QuizCategoryController {
     @Autowired
     private QuizCategoryRepository quizCategoryRepository;
 
-    // Metoda pro STAŽENÍ všech kvízů (tu už jsme tam měli)
+    // Metoda pro stažení všech kvízů
     @GetMapping
     public List<QuizCategory> getAllCategories() {
         return quizCategoryRepository.findAll();
     }
 
-    // Metoda pro PŘIDÁNÍ nového kvízu (to, co jsi teď tvořil)
+    // Metoda pro přidání nového kvízu
     @PostMapping("/add")
     public ResponseEntity<?> addQuizCategory(@RequestBody QuizCategory newCategory) {
         try {
-            // Tady to konečně použije to quizCategoryRepository definované nahoře
             quizCategoryRepository.save(newCategory);
             return ResponseEntity.ok().body("{\"message\": \"Kvíz úspěšně vytvořen\"}");
         } catch (Exception e) {

@@ -77,7 +77,6 @@ public class UserService {
         return true;
     }
 
-    // Login – vrací true/false
     public boolean login(String username, String password) {
         return userRepository.findByUsername(username)
                 .map(user -> BCrypt.checkpw(password, user.getPassword()))
@@ -89,7 +88,6 @@ public class UserService {
         return userRepository.findByUsername(username).orElse(null);
     }
 
-    // 🔥 Vrátí všechny uživatele (pro admin panel)
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
@@ -117,7 +115,6 @@ public class UserService {
     // Superadmin může odebrat admin práva
     public boolean removeAdmin(String caller, String targetUser) {
 
-        // Jen superadmin může odebírat admin práva
         if (!isSuperAdmin(caller)) {
             return false;
         }

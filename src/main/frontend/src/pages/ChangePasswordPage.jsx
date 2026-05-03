@@ -18,7 +18,7 @@ function ChangePasswordPage({ goBack }) {
 
         //Kontrola shody nového hesla
         if (newPassword !== confirmNewPassword) {
-            alert("❌ Nová hesla se neshodují!");
+            alert("Nová hesla se neshodují!");
             return;
         }
 
@@ -39,10 +39,10 @@ function ChangePasswordPage({ goBack }) {
             const result = await response.json();
 
             if (result === true) {
-                alert("✅ Heslo bylo úspěšně změněno!");
+                alert("Heslo bylo úspěšně změněno!");
                 goBack();
             } else {
-                alert("❌ Změna se nezdařila! Zřejmě jste zadali špatné staré heslo.");
+                alert("Změna se nezdařila! Zřejmě jste zadali špatné staré heslo.");
             }
         } catch (error) {
             alert("Chyba při komunikaci se serverem");

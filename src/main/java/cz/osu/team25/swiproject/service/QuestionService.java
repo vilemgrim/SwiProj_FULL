@@ -18,12 +18,12 @@ public class QuestionService {
     // Hlavní logika pro generování kvízu
     public List<Map<String, Object>> getRandomQuizWithRandomOptions(String quiz, int count) {
 
-        // ==========================================
+
         // 1. SPECIÁLNÍ KATEGORIE: CELÝ SVĚT
-        // ==========================================
+
         if (quiz.equals("WORLD_CAPITALS")) {
 
-            // spojíme všechny otázky ze všech kvízů
+            // spojí všechny otázky ze všech kvízů
             List<Question> all = new ArrayList<>();
             all.addAll(questionRepository.findByQuiz("EU_CAPITALS"));
             all.addAll(questionRepository.findByQuiz("ASIA_CAPITALS"));
@@ -31,14 +31,9 @@ public class QuestionService {
             all.addAll(questionRepository.findByQuiz("NORTH_AMERICA_CAPITALS"));
             all.addAll(questionRepository.findByQuiz("SOUTH_AMERICA_CAPITALS"));
             all.addAll(questionRepository.findByQuiz("OCEANIA_CAPITALS"));
-
-            // zamícháme
             Collections.shuffle(all);
-
-            // vybereme X náhodných otázek
             List<Question> selected = all.subList(0, Math.min(count, all.size()));
 
-            // unikátní správné odpovědi z celého světa
             Set<String> uniqueAnswers = new HashSet<>();
             for (Question q : all) {
                 uniqueAnswers.add(q.getCorrect());
@@ -54,16 +49,15 @@ public class QuestionService {
                 List<String> options = new ArrayList<>();
                 options.add(correct);
 
-                // --- VÝHYBKA (HYBRIDNÍ SYSTÉM) ---
+                // Ošetření pro systém špatných odpovědí
                 if (q.getWrongAnswers() != null && q.getWrongAnswers().size() >= 3) {
-                    // 🟢 NOVÝ SYSTÉM: Použijeme špatné odpovědi zadané adminem
                     List<String> manualWrongs = new ArrayList<>(q.getWrongAnswers());
                     Collections.shuffle(manualWrongs);
                     for (int i = 0; i < 3; i++) {
                         options.add(manualWrongs.get(i));
                     }
                 } else {
-                    // 🟠 STARÝ SYSTÉM: Náhodné jiné správné odpovědi
+                    // Špatné odpovědi se losujou (hlavní města)
                     List<String> wrong = new ArrayList<>(allCorrectAnswers);
                     wrong.remove(correct);
                     Collections.shuffle(wrong);
@@ -72,7 +66,6 @@ public class QuestionService {
                         options.add(wrong.get(i));
                     }
                 }
-                // ---------------------------------
 
                 while (options.size() < 4) {
                     options.add("N/A");
@@ -90,10 +83,6 @@ public class QuestionService {
 
             return result;
         }
-
-        // ==========================================
-        // 2. STANDARDNÍ KATEGORIE (Vč. nových dynamických)
-        // ==========================================
 
         // všechny otázky z daného kvízu
         List<Question> all = questionRepository.findByQuiz(quiz);
@@ -118,16 +107,13 @@ public class QuestionService {
             List<String> options = new ArrayList<>();
             options.add(correct);
 
-            // --- VÝHYBKA (HYBRIDNÍ SYSTÉM) ---
             if (q.getWrongAnswers() != null && q.getWrongAnswers().size() >= 3) {
-                // 🟢 NOVÝ SYSTÉM: Použijeme špatné odpovědi zadané adminem
                 List<String> manualWrongs = new ArrayList<>(q.getWrongAnswers());
                 Collections.shuffle(manualWrongs);
                 for (int i = 0; i < 3; i++) {
                     options.add(manualWrongs.get(i));
                 }
             } else {
-                // 🟠 STARÝ SYSTÉM: Náhodné jiné správné odpovědi
                 List<String> wrong = new ArrayList<>(allCorrectAnswers);
                 wrong.remove(correct); // odstraníme správnou odpověď
                 Collections.shuffle(wrong);
@@ -137,7 +123,6 @@ public class QuestionService {
                     options.add(wrong.get(i));
                 }
             }
-            // ---------------------------------
 
             // pokud by bylo málo odpovědí v DB, doplníme placeholdery
             while (options.size() < 4) {

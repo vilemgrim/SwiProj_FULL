@@ -65,10 +65,10 @@ function UserAdminPage({ username }) {
             }}
         >
 
-            {/* JEDNOTNÉ ADMIN MENU */}
+
             <AdminMenu username={username} isAdmin={true} />
 
-            {/* HLAVNÍ OBSAH */}
+
             <div
                 style={{
                     background: "white",

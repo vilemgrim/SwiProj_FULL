@@ -30,7 +30,7 @@ public class QuestionController {
         System.out.println("QUIZ ENDPOINT CALLED: " + quiz + ", POČET OTÁZEK: " + count);
         return questionService.getRandomQuizWithRandomOptions(quiz, count);
     }
-
+    // Tvorba otázek
     @PostMapping("/add")
     public ResponseEntity<?> addQuestion(@RequestBody Question question) {
         try {
@@ -41,7 +41,7 @@ public class QuestionController {
             return ResponseEntity.badRequest().body("{\"error\": \"Chyba při ukládání na server.\"}");
         }
     }
-    // 1. Získání VŠECH otázek (pro zobrazení v tabulce adminovi)
+    // 1. Získání všech otázek (pro zobrazení v tabulce adminovi)
     @GetMapping
     public List<Question> getAllQuestions() {
         return questionRepository.findAll();
@@ -54,8 +54,7 @@ public class QuestionController {
             return ResponseEntity.notFound().build();
         }
 
-        updatedQuestion.setId(id); // Pojistka, aby se přepsala ta správná otázka
-
+        updatedQuestion.setId(id);
         try {
             questionRepository.save(updatedQuestion);
             return ResponseEntity.ok().body("{\"message\": \"Otázka úspěšně upravena\"}");

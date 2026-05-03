@@ -74,7 +74,6 @@ function HomePage(props) {
                 </p>
             </div>
 
-            {/*ZÁLOŽKY PRO FILTROVÁNÍ*/}
             <div className="category-tabs">
                 {categories.map(category => (
                     <button
@@ -87,7 +86,6 @@ function HomePage(props) {
                 ))}
             </div>
 
-            {/*VYFILTROVANÉ KARTIČKY KVÍZŮ*/}
             <div className="quizzes-grid">
                 {filteredQuizzes.length > 0 ? (
                     filteredQuizzes.map((quiz) => (
